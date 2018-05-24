@@ -11,7 +11,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch, props) => {
-  return {
+   return {
+    onGetProfile: (username) => {
+      dispatch(profileAction(username));
+    }
   }
 };
 

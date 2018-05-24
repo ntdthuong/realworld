@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 
 import { profileAction } from '../actions';
 export class Profile extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   profileAction(this.props.info.match.params.id);
-  // }
+  constructor(props) {
+    super(props);
+    this.props.onGetProfile(this.props.info.match.params.id) || '' ;
+  }
   render() {
     const { profile } = this.props;
     return (

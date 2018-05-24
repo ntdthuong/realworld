@@ -25,7 +25,7 @@ export class ArticlePreview extends Component {
             <img alt='aaa' src={articleInfo.author.image} />
           </a>
           <div className="info">
-            <a href={`/@${articleInfo.author.username}`} className="author">{articleInfo.author.username}</a>
+            <a href={`/${articleInfo.author.username}`} className="author">{articleInfo.author.username}</a>
             <span className="date">{this.formatDate()}</span>
           </div>
           <button className="btn btn-outline-primary btn-sm pull-xs-right">
