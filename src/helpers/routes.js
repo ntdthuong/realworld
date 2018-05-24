@@ -11,7 +11,7 @@ const routes = [
   {
     path: '/',
     exact: true,
-    main: () => <ContentHomeContainer />
+    main: (info) => <ContentHomeContainer info={info}/>
   },
   {
     path: '/login',
@@ -36,7 +36,7 @@ const routes = [
   {
     path: '/:id',
     exact: true,
-    main: () => <ContentProfileContainer />
+    main: (info) => <ContentProfileContainer info={info}/>
   },
   {
     path: '/article/:id',

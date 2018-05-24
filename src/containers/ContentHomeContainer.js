@@ -1,12 +1,14 @@
 import { connect } from 'react-redux';
 
-import { fetchPagingAction } from '../actions';
+import { fetchPagingAction, profileAction } from '../actions';
 import { ContentHome } from '../components/ContentHome';
 
 const mapStateToProps = (state) => {
   return {
     articles: state.articles,
-    user: state.user
+    user: state.user,
+    profile: state.profile,
+    tags: state.tags
   }
 };
 
@@ -15,6 +17,9 @@ const mapDispatchToProps = (dispatch, props) => {
     onFetchPaging: (page) => {
       dispatch(fetchPagingAction(page));
     },
+    onGetProfile: (username) => {
+      dispatch(profileAction(username));
+    }
   }
 };
 

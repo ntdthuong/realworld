@@ -3,9 +3,11 @@ import { history } from '../helpers/history';
 
 const url = 'https://conduit.productionready.io/api/';
 const url_articles = 'articles/?limit=10&offset=';
-const url_getUSer = 'user';
+const url_getUSer = 'user/';
 const url_signUp = 'users/';
 const url_signIn = 'users/login';
+const url_profile = 'profiles/';
+const url_tags = 'tags/';
 
 function* getArticlesFromApi(params) {
   const sub = params ? `${params}` : '0';
@@ -46,42 +48,28 @@ function* getUserfromApi(token) {
   return userInfo;
 }
 
+function* getProfileFromApi(params) {
+  const profile = yield axios.get(`${url}${url_profile}${params}`)
+      .then(res => {
+        return res.data.profile;
+      })
+  return profile;
+}
 
-// function* getFilterModeFromApi() {
-//   const filterModeData = yield axios.get(`${filterMode}`)
-//       .then(res => {
-//         return res.data;
-//       })
-//   return filterModeData;
-// }
+function* getTagsFromApi() {
+  const tags = yield axios.get(`${url}${url_tags}`)
+      .then(res => {
+        return res.data.tags;
+      })
+  return tags;
+}
 
-// function* putTaskToApi(id) {
-//   const obj = yield Api.getTasksFromApi(id);
-//   yield axios.put(`${url}/${id}`, {
-//       ...obj,
-//       "isDone": !obj.isDone
-//     }).then(res => {
-//       console.log('changed');
-//     })
-// }
-
-// function* removeTaskFromApi(id) {
-//   yield axios.delete(`${url}/${id}`)
-//   .then(res => {
-//     console.log('removed');
-//   })
-// }
-
-// function* addTaskToApi(newTask) {
-//   yield  axios.post(url, newTask)
-//     .then(function (response) {
-//       console.log('added');
-//     })
-// }
 
 export const Api = {
   getArticlesFromApi,
   getUserfromApi,
   postUserToApi,
-  matchUserToApi
+  matchUserToApi,
+  getProfileFromApi,
+  getTagsFromApi
 }

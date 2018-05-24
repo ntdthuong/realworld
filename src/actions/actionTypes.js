@@ -1,9 +1,15 @@
 export const FETCH_ARTICLE = 'FETCH_ARTICLE';
 export const FETCH_PAGING = 'FETCH_PAGING';
+export const FETCH_SUCCEEDED = 'FETCH_SUCCEEDED';
+export const FETCH_FAILED = 'FETCH_FAILED';
+
 export const SIGN_UP = 'SIGN_UP';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
+
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
 
-export const FETCH_SUCCEEDED = 'FETCH_SUCCEEDED';
-export const FETCH_FAILED = 'FETCH_FAILED';
+export const FETCH_PROFILE = 'FETCH_PROFILE';
+export const FETCH_PROFILE_SUCCESS = 'FETCH_PROFILE_SUCCESS';
+export const FETCH_TAGS_SUCCEEDED = 'FETCH_TAGS_SUCCEEDED';
+

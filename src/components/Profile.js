@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import { profileAction } from '../actions';
 export class Profile extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   profileAction(this.props.info.match.params.id);
+  // }
   render() {
+    const { profile } = this.props;
     return (
       <div className="profile-page">
-
         <div className="user-info">
           <div className="container">
             <div className="row">
 
               <div className="col-xs-12 col-md-10 offset-md-1">
-                <img src="http://i.imgur.com/Qr71crq.jpg" className="user-img" alt="img user"/>
-                <h4>Eric Simons</h4>
-                <p>
-                  Cofounder @GoThinkster, lived in Aol's HQ for a few months, kinda looks like Peeta from the Hunger Games
-                </p>
+                <img src={profile.image ? profile.image : 'https://static.productionready.io/images/smiley-cyrus.jpg'} className="user-img" alt="img user"/>
+                <h4>{profile.username}</h4>
+                <p>{profile.bio}</p>
                 <Link
                   className="btn btn-sm btn-outline-secondary action-btn"
                   to='/settings'

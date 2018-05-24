@@ -5,6 +5,9 @@ import {
   SIGN_UP_SUCCESS,
   SIGN_IN,
   SIGN_IN_SUCCESS,
+  FETCH_PROFILE,
+  FETCH_PROFILE_SUCCESS,
+  FETCH_TAGS_SUCCEEDED,
   FETCH_SUCCEEDED,
   FETCH_FAILED
 } from './actionTypes';
@@ -35,6 +38,13 @@ export const signInAction = (user) => {
   }
 }
 
+export const profileAction = (username) => {
+  return {
+    type: FETCH_PROFILE,
+    username
+  }
+}
+
 export const signUpSuccessAction = (receivedUser) => {
   return {
     type: SIGN_UP_SUCCESS,
@@ -46,6 +56,20 @@ export const signInSuccessAction = (receivedUser) => {
   return {
     type: SIGN_IN_SUCCESS,
     receivedUser
+  }
+}
+
+export const profileSuccessAction = (receivedProfile) => {
+  return {
+    type: FETCH_PROFILE_SUCCESS,
+    receivedProfile
+  }
+}
+
+export const tagsSuccessAction = (receivedTags) => {
+  return {
+    type: FETCH_TAGS_SUCCEEDED,
+    receivedTags
   }
 }
 

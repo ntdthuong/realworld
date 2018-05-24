@@ -11,7 +11,8 @@ export class ContentHome extends Component {
     if(!user) return <Banner />
   }
   render() {
-    const { articles, onFetchPaging } = this.props;
+    const { articles, onFetchPaging, onGetProfile, tags } = this.props;
+    console.log('a',this.props.info)
     return (
       <div className="home-page">
         {this.genBanner()}
@@ -23,10 +24,11 @@ export class ContentHome extends Component {
                 articles={articles.articles}
                 articlesCount={articles.articlesCount}
                 onFetchPaging={onFetchPaging}
+                onGetProfile={onGetProfile}
               />
             </div>
             <div className="col-md-3">
-              <Tags />
+              <Tags tags={tags}/>
             </div>
           </div>
         </div>
