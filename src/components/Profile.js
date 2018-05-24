@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export class Profile extends Component {
   render() {
@@ -15,11 +16,14 @@ export class Profile extends Component {
                 <p>
                   Cofounder @GoThinkster, lived in Aol's HQ for a few months, kinda looks like Peeta from the Hunger Games
                 </p>
-                <button className="btn btn-sm btn-outline-secondary action-btn">
-                  <i className="ion-plus-round"></i>
+                <Link
+                  className="btn btn-sm btn-outline-secondary action-btn"
+                  to='/settings'
+                >
+                  <i className="ion-gear-a"></i>
                   &nbsp;
-                  Follow Eric Simons
-                </button>
+                  Edit Profile Settings
+                </Link>
               </div>
 
             </div>

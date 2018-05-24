@@ -6,38 +6,34 @@ import { history } from '../helpers/history';
 // import { } from '../actions';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
-import { ContentHomeContainer } from './ContentHomeContainer';
-import { ContentSignUpContainer } from './ContentSignUpContainer';
-import { ContentSignInContainer } from './ContentSignInContainer';
-import { ContentSettingsContainer } from './ContentSettingsContainer';
-import { ContentEditorArticleContainer } from './ContentEditorArticleContainer';
-import { ContentProfileContainer } from './ContentProfileContainer';
+// import { ContentHomeContainer } from './ContentHomeContainer';
+// import { ContentSignUpContainer } from './ContentSignUpContainer';
+// import { ContentSignInContainer } from './ContentSignInContainer';
+// import { ContentSettingsContainer } from './ContentSettingsContainer';
+// import { ContentEditorArticleContainer } from './ContentEditorArticleContainer';
+// import { ContentProfileContainer } from './ContentProfileContainer';
 // import { ContentArticleDetailsContainer } from './ContentArticleDetailsContainer';
 
-// import routes from '../routes';
+import routes from '../helpers/routes';
 
 class Root extends Component {
+  genRoute = () => {
+    return routes.map((route, index) =>
+      <Route
+        key={index}
+        path={route.path}
+        exact={route.exact}
+        component={route.main}
+      />
+    )
+  }
   render() {
     const { user } = this.props;
-    const idUser = `/@${user.username}`;
-    console.log(history.location)
     return (
       <Router history={history}>
         <div>
           <Header user={user}/>
-          <Switch>
-            <Route exact path="/"
-              component={ContentHomeContainer}
-            />
-            <Route exact path="/login"
-              component={ContentSignInContainer}
-            />
-            <Route exact path="/register" component={ContentSignUpContainer}/>
-            <Route exact path="/settings" component={ContentSettingsContainer}/>
-            <Route path="/editor" component={ContentEditorArticleContainer}/>
-            <Route path={idUser} component={ContentProfileContainer}/>
-          </Switch>
-          {/*<ContentArticleDetailsContainer/>*/}
+          <Switch>{this.genRoute()}</Switch>
           <Footer />
         </div>
       </Router>

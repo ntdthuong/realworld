@@ -3,7 +3,7 @@ import { fetchSuccessAction, fetchFailedAction } from '../actions';
 import {
   FETCH_PAGING
 } from '../actions/actionTypes';
-import { Api } from './Api';
+import { Api } from '../helpers/Api';
 
 export function* fetchArticles(action) {
   try {

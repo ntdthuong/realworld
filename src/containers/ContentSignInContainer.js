@@ -1,22 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
-import {
-  signInAction
-} from '../actions';
+import { signInAction } from '../actions';
 import { SignIn } from '../components/SignIn';
-
-class ContentSignIn extends Component {
-  render() {
-    const { user, onSignIn } = this.props;
-    return (
-      <SignIn
-        onSignIn={onSignIn}
-        user={user}
-      />
-    );
-  }
-}
 
 const mapStateToProps = (state) => {
   return {
@@ -28,8 +14,17 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     onSignIn: (user) => {
       dispatch(signInAction(user));
+    },
+    onGenErrors: (errors) => {
+      let arrError = []
+      if(errors) {
+        for(let key in errors) {
+          arrError.push(<li key={key}>{`${key} ${errors[key]}`}</li>)
+        }
+        return  <ul className="error-messages">{arrError}</ul>
+      }
     }
   }
 };
 
-export const ContentSignInContainer = connect(mapStateToProps, mapDispatchToProps)(ContentSignIn);
+export const ContentSignInContainer = connect(mapStateToProps, mapDispatchToProps)(SignIn);

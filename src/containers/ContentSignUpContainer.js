@@ -1,23 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
-import {
-  signUpAction
-} from '../actions';
+import { signUpAction } from '../actions';
 import { SignUp } from '../components/SignUp';
 
-class ContentSignUp extends Component {
-
-  render() {
-    const { user, onSignUp } = this.props;
-    return (
-      <SignUp
-        onSignUp={onSignUp}
-        user={user}
-      />
-    );
-  }
-}
 
 const mapStateToProps = (state) => {
   return {
@@ -29,8 +15,17 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     onSignUp: (user) => {
       dispatch(signUpAction(user));
+    },
+    onGenErrors: (errors) => {
+      let arrError = []
+      if(errors) {
+        for(let key in errors) {
+          arrError.push(<li key={key}>{`${key} ${errors[key]}`}</li>)
+        }
+        return  <ul className="error-messages">{arrError}</ul>
+      }
     }
   }
 };
 
-export const ContentSignUpContainer = connect(mapStateToProps, mapDispatchToProps)(ContentSignUp);
+export const ContentSignUpContainer = connect(mapStateToProps, mapDispatchToProps)(SignUp);

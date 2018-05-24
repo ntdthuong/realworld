@@ -6,16 +6,6 @@ import {
 } from '../actions';
 import { Profile } from '../components/Profile';
 
-class ContentProfile extends Component {
-  render() {
-    // const { user, articles } = this.props;
-    return (
-      <Profile
-      />
-    );
-  }
-}
-
 const mapStateToProps = (state) => {
   return {
     articles: state.articles,
@@ -29,4 +19,4 @@ const mapDispatchToProps = (dispatch, props) => {
   }
 };
 
-export const ContentProfileContainer = connect(mapStateToProps, mapDispatchToProps)(ContentProfile);
+export const ContentProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile);

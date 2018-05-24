@@ -1,20 +1,8 @@
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {
-
-} from '../actions';
+import { } from '../actions';
 import { Settings } from '../components/Settings';
-
-class ContentSettings extends Component {
-  render() {
-    // const { user } = this.props;
-    return (
-      <Settings
-      />
-    );
-  }
-}
 
 const mapStateToProps = (state) => {
   return {
@@ -28,4 +16,4 @@ const mapDispatchToProps = (dispatch, props) => {
   }
 };
 
-export const ContentSettingsContainer = connect(mapStateToProps, mapDispatchToProps)(ContentSettings);
+export const ContentSettingsContainer = connect(mapStateToProps, mapDispatchToProps)(Settings);

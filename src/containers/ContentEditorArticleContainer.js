@@ -1,20 +1,8 @@
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {
-
-} from '../actions';
+import { } from '../actions';
 import { EditorArticle } from '../components/EditorArticle';
-
-class ContentEditorArticle extends Component {
-  render() {
-    // const { user, articles } = this.props;
-    return (
-      <EditorArticle
-      />
-    );
-  }
-}
 
 const mapStateToProps = (state) => {
   return {
@@ -29,4 +17,4 @@ const mapDispatchToProps = (dispatch, props) => {
   }
 };
 
-export const ContentEditorArticleContainer = connect(mapStateToProps, mapDispatchToProps)(ContentEditorArticle);
+export const ContentEditorArticleContainer = connect(mapStateToProps, mapDispatchToProps)(EditorArticle);

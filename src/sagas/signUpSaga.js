@@ -3,7 +3,7 @@ import { signUpSuccessAction, fetchFailedAction } from '../actions';
 import {
   SIGN_UP
 } from '../actions/actionTypes';
-import { Api } from './Api';
+import { Api } from '../helpers/Api';
 
 export function* signUpUser(user) {
   try {

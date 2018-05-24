@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
-  // signUpAction
-} from '../actions';
+
 export class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -26,20 +24,13 @@ export class SignUp extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const userInfo = {user: this.state};
     const { onSignUp } = this.props;
-    onSignUp(userInfo);
+    onSignUp({user: this.state});
   }
 
   handleError = () => {
-    const { errors } = this.props.user;
-    let arrError = []
-    if(errors) {
-      for(let key in errors) {
-        arrError.push(<li key={key}>{`${key} ${errors[key]}`}</li>)
-      }
-    }
-    if(errors) return  <ul className="error-messages">{arrError}</ul>
+    const { onGenErrors, user } = this.props;
+    return onGenErrors(user.errors);
   }
 
   render() {
@@ -48,7 +39,6 @@ export class SignUp extends Component {
       <div className="auth-page">
         <div className="container page">
           <div className="row">
-
             <div className="col-md-6 offset-md-3 col-xs-12">
               <h1 className="text-xs-center">Sign up</h1>
               <p className="text-xs-center">
@@ -90,7 +80,6 @@ export class SignUp extends Component {
                 </button>
               </form>
             </div>
-
           </div>
         </div>
       </div>

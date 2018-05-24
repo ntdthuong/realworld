@@ -1,20 +1,8 @@
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {
-
-} from '../actions';
+import { } from '../actions';
 import { ArticleDetails } from '../components/ArticleDetails';
-
-class ContentArticleDetails extends Component {
-  render() {
-    // const { user, articles } = this.props;
-    return (
-      <ArticleDetails
-      />
-    );
-  }
-}
 
 const mapStateToProps = (state) => {
   return {
@@ -29,4 +17,4 @@ const mapDispatchToProps = (dispatch, props) => {
   }
 };
 
-export const ContentArticleDetailsContainer = connect(mapStateToProps, mapDispatchToProps)(ContentArticleDetails);
+export const ContentArticleDetailsContainer = connect(mapStateToProps, mapDispatchToProps)(ArticleDetails);

@@ -3,7 +3,7 @@ import { signInSuccessAction, fetchFailedAction } from '../actions';
 import {
   SIGN_IN
 } from '../actions/actionTypes';
-import { Api } from './Api';
+import { Api } from '../helpers/Api';
 
 export function* getUser() {
   try {
