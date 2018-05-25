@@ -21,11 +21,11 @@ class Root extends Component {
     )
   }
   render() {
-    const { user, onGetProfile } = this.props;
+    const { user } = this.props;
     return (
       <Router history={history}>
         <div>
-          <Header user={user} onGetProfile={onGetProfile}/>
+          <Header user={user} />
           <Switch>{this.genRoute()}</Switch>
           <Footer />
         </div>
@@ -37,15 +37,13 @@ class Root extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     articles: state.articles,
-    user: state.user
+    user: state.user,
+    profile: state.profile
   }
 };
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    onGetProfile: (username) => {
-      dispatch(profileAction(username));
-    }
   }
 };
 

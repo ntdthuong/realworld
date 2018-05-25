@@ -8,6 +8,8 @@ import {
   FETCH_PROFILE,
   FETCH_PROFILE_SUCCESS,
   FETCH_TAGS_SUCCEEDED,
+  ADD_ARTICLE,
+  ADD_ARTICLE_SUCCEEDED,
   FETCH_SUCCEEDED,
   FETCH_FAILED
 } from './actionTypes';
@@ -17,10 +19,18 @@ export const fetchArticleAction = () => {
     type: FETCH_ARTICLE
   }
 }
+
 export const fetchPagingAction = (page) => {
   return {
     type: FETCH_PAGING,
     page
+  }
+}
+
+export const addArticleAction = (article) => {
+  return {
+    type: ADD_ARTICLE,
+    article
   }
 }
 
@@ -70,6 +80,13 @@ export const tagsSuccessAction = (receivedTags) => {
   return {
     type: FETCH_TAGS_SUCCEEDED,
     receivedTags
+  }
+}
+
+export const addArticleSuccessAction = (receivedArticle) => {
+  return {
+    type: ADD_ARTICLE_SUCCEEDED,
+    receivedArticle
   }
 }
 

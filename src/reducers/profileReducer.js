@@ -8,7 +8,6 @@ export function profileReducer(state = {} , action) {
     case FETCH_PROFILE_SUCCESS:
       return action.receivedProfile;
     case FETCH_FAILED:
-      console.log('fail')
       return action.error;
     default :
       return state;

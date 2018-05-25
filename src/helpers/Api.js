@@ -2,6 +2,7 @@ import axios from 'axios';
 import { history } from '../helpers/history';
 
 const url = 'https://conduit.productionready.io/api/';
+const url_dfArticles = 'articles/';
 const url_articles = 'articles/?limit=10&offset=';
 const url_getUSer = 'user/';
 const url_signUp = 'users/';
@@ -64,12 +65,26 @@ function* getTagsFromApi() {
   return tags;
 }
 
+function* postArticleToApi(article, token) {
+  const recievedArticle = yield axios({
+        method: 'post',
+        url: `${url}${url_dfArticles}`,
+        data: article,
+        headers: {authorization: `Token ${token}`}
+      })
+      .then(res => {
+        console.log(res.data)
+        return res.data.article;
+      })
+  return recievedArticle;
+}
 
 export const Api = {
   getArticlesFromApi,
+  postArticleToApi,
+  getTagsFromApi,
   getUserfromApi,
   postUserToApi,
   matchUserToApi,
-  getProfileFromApi,
-  getTagsFromApi
+  getProfileFromApi
 }

@@ -5,7 +5,7 @@ import { profileAction } from '../actions';
 export class Profile extends Component {
   constructor(props) {
     super(props);
-    this.props.onGetProfile(this.props.info.match.params.id) || '' ;
+    this.props.onGetProfile(this.props.info.match.params.id);
   }
   render() {
     const { profile } = this.props;

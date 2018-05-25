@@ -3,17 +3,10 @@ import { Link } from 'react-router-dom';
 import { history } from '../helpers/history';
 
 export class Header extends Component {
-  handleClick = (pathname) => {
-    const { user, onGetProfile } = this.props;
-    if(pathname === `/@${user.username}`) {
-      onGetProfile(user.username);
-    }
-  }
   genMenu = () => {
     const { user } = this.props;
     const { pathname } = history.location;
     let arrMenu = [];
-    // console.log(this.props.match)
     if(!user) {
       arrMenu = [
         {id: 1, path: '/', text: 'Home'},
@@ -25,16 +18,15 @@ export class Header extends Component {
       const profile = user.image ? `<img alt='img user' src=${user.image} class="user-pic" />${user.username}` : user.username
       arrMenu = [
         {id: 1, path: '/', text: 'Home'},
-        {id: 2, path: '/editor', text: '<i class="ion-compose"></i>&nbsp;New Post', name: 'newPost'},
+        {id: 2, path: '/editor', text: '<i class="ion-compose"></i>&nbsp;New Post'},
         {id: 3, path: '/settings', text: '<i class="ion-gear-a"></i>&nbsp;Settings', name: 'settings'},
-        {id: 4, path: `/@${user.username}`, text: profile, name: 'profile'},
+        {id: 4, path: `/${user.username}`, text: profile},
       ]
     }
     return arrMenu.map(menu =>
       <li
         key={menu.id}
         className={pathname === menu.path ? 'nav-item active' : 'nav-item'}
-        onClick={() => this.handleClick(pathname)}
       >
         <Link
           className="nav-link"

@@ -1,47 +1,47 @@
 import React from 'react';
-import { ContentHomeContainer } from '../containers/ContentHomeContainer';
-import { ContentSignUpContainer } from '../containers/ContentSignUpContainer';
-import { ContentSignInContainer } from '../containers/ContentSignInContainer';
-import { ContentSettingsContainer } from '../containers/ContentSettingsContainer';
-import { ContentEditorArticleContainer } from '../containers/ContentEditorArticleContainer';
-import { ContentProfileContainer } from '../containers/ContentProfileContainer';
-import { ContentArticleDetailsContainer } from '../containers/ContentArticleDetailsContainer';
+import { HomeContainer } from '../containers/HomeContainer';
+import { SignUpContainer } from '../containers/SignUpContainer';
+import { SignInContainer } from '../containers/SignInContainer';
+import { SettingsContainer } from '../containers/SettingsContainer';
+import { EditorArticleContainer } from '../containers/EditorArticleContainer';
+import { ProfileContainer } from '../containers/ProfileContainer';
+import { ArticleDetailsContainer } from '../containers/ArticleDetailsContainer';
 
 const routes = [
   {
     path: '/',
     exact: true,
-    main: (info) => <ContentHomeContainer info={info}/>
+    main: (info) => <HomeContainer info={info}/>
   },
   {
     path: '/login',
     exact: true,
-    main: () => <ContentSignInContainer />
+    main: () => <SignInContainer />
   },
   {
     path: '/register',
     exact: true,
-    main: () => <ContentSignUpContainer />
+    main: () => <SignUpContainer />
   },
   {
     path: '/editor',
     exact: true,
-    main: () => <ContentEditorArticleContainer />
+    main: () => <EditorArticleContainer />
   },
   {
     path: '/settings',
     exact: true,
-    main: () => <ContentSettingsContainer />
+    main: () => <SettingsContainer />
   },
   {
     path: '/:id',
     exact: true,
-    main: (info) => <ContentProfileContainer info={info}/>
+    main: (info) => <ProfileContainer info={info}/>
   },
   {
     path: '/article/:id',
     exact: true,
-    main: () => <ContentArticleDetailsContainer />
+    main: () => <ArticleDetailsContainer />
   }
 ];
 export default routes;
