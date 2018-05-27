@@ -29,8 +29,8 @@ export class Settings extends Component {
     }
   }
 
-  static getDerivedStateFromProps(nextProps,prevState) {
-    if(prevState.username) {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.username) {
       const { image, username, bio, email, password } = prevState;
       return {
         image,
@@ -60,7 +60,6 @@ export class Settings extends Component {
 
   render() {
     const { user } = this.props;
-    console.log('this.state',this.state);
     return (
       <div className="settings-page">
         <div className="container page">
