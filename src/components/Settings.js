@@ -19,29 +19,38 @@ export class Settings extends Component {
   componentDidMount() {
     if (Object.keys(this.props.user).length > 0) {
       const { image, username, bio, email, password } = this.props.user;
-      let pass = password ? password : '';
       this.setState({
         image,
         username,
         bio,
         email,
-        password: pass
+        password
       });
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps && nextProps.user) {
-      const { image, username, bio, email, password } = nextProps.user;
-      let pass = password ? password : '';
-      this.setState({
+  static getDerivedStateFromProps(nextProps,prevState) {
+    if(prevState.username) {
+      const { image, username, bio, email, password } = prevState;
+      return {
         image,
         username,
         bio,
         email,
-        password: pass
-      });
+        password
+      };
     }
+    if (nextProps && nextProps.user) {
+      const { image, username, bio, email, password } = nextProps.user;
+      return {
+        image,
+        username,
+        bio,
+        email,
+        password
+      };
+    }
+    return null;
   }
 
   onChange = (e) => {
@@ -51,6 +60,7 @@ export class Settings extends Component {
 
   render() {
     const { user } = this.props;
+    console.log('this.state',this.state);
     return (
       <div className="settings-page">
         <div className="container page">
@@ -59,7 +69,7 @@ export class Settings extends Component {
             <div className="col-md-6 offset-md-3 col-xs-12">
               <h1 className="text-xs-center">Your Settings</h1>
 
-              <form>
+              <form >
                 <fieldset>
                   <fieldset className="form-group">
                     <input
@@ -67,7 +77,7 @@ export class Settings extends Component {
                       type="text"
                       name='image'
                       placeholder="URL of profile picture"
-                      value={this.state.image}
+                      value={this.state.image || ''}
                       onChange={this.onChange}
                     />
                   </fieldset>
@@ -76,7 +86,7 @@ export class Settings extends Component {
                       className="form-control form-control-lg"
                       type="text" placeholder="Your Name"
                       name='username'
-                      value={this.state.username}
+                      value={this.state.username || ''}
                       onChange={this.onChange}
                     />
                   </fieldset>
@@ -86,7 +96,7 @@ export class Settings extends Component {
                       rows="8"
                       name='bio'
                       placeholder="Short bio about you"
-                      value={this.state.bio}
+                      value={this.state.bio || ''}
                       onChange={this.onChange}
                     ></textarea>
                   </fieldset>
@@ -96,7 +106,7 @@ export class Settings extends Component {
                       type="text"
                       placeholder="Email"
                       name='email'
-                      value={this.state.email}
+                      value={this.state.email || ''}
                       onChange={this.onChange}
                     />
                   </fieldset>
@@ -106,7 +116,7 @@ export class Settings extends Component {
                       type="password"
                       name='password'
                       placeholder="Password"
-                      value={this.state.password}
+                      value={this.state.password || ''}
                       onChange={this.onChange}
                     />
                   </fieldset>
