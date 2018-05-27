@@ -6,7 +6,6 @@ import { profileAction } from '../actions';
 export class Settings extends Component {
   constructor(props) {
     super(props);
-    const { image, username, bio, email, password } = props.user;
     this.state = {
       image: '',
       username: '',
@@ -30,17 +29,7 @@ export class Settings extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.username) {
-      const { image, username, bio, email, password } = prevState;
-      return {
-        image,
-        username,
-        bio,
-        email,
-        password
-      };
-    }
-    if (nextProps && nextProps.user) {
+    if (nextProps.user) {
       const { image, username, bio, email, password } = nextProps.user;
       return {
         image,
@@ -58,6 +47,13 @@ export class Settings extends Component {
     this.setState({ ...this.state, [name]: value })
   }
 
+  handleSumit = (e) => {
+    e.preventDefault();
+    const user = {user: {...this.state}};
+    const notPass = {user: {...this.state}};
+    delete notPass.user.password;
+    console.log('state', this.state.password ? user : notPass);
+  }
   render() {
     const { user } = this.props;
     return (
@@ -68,7 +64,7 @@ export class Settings extends Component {
             <div className="col-md-6 offset-md-3 col-xs-12">
               <h1 className="text-xs-center">Your Settings</h1>
 
-              <form >
+              <form onSubmit={this.handleSumit}>
                 <fieldset>
                   <fieldset className="form-group">
                     <input
