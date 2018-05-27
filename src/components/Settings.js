@@ -4,27 +4,23 @@ import PropTypes from 'prop-types';
 import { profileAction } from '../actions';
 
 export class Settings extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      image: '',
-      username: '',
-      bio: '',
-      email: '',
-      password: ''
-    }
+  static defaultProps = {
+    image: '',
+    username: '',
+    bio: '',
+    email: '',
+    password: ''
   }
 
-  componentDidMount() {
-    if (Object.keys(this.props.user).length > 0) {
-      const { image, username, bio, email, password } = this.props.user;
-      this.setState({
-        image,
-        username,
-        bio,
-        email,
-        password
-      });
+  constructor(props) {
+    super(props);
+    const { image, username, bio, email, password } = props.user;
+    this.state = {
+      image,
+      username,
+      bio,
+      email,
+      password: ''
     }
   }
 
