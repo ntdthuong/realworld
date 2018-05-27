@@ -4,36 +4,53 @@ import PropTypes from 'prop-types';
 import { profileAction } from '../actions';
 
 export class Settings extends Component {
-  static defaultProps = {
-    user: {
-      image: '',
-      username: '2',
-      bio: '3',
-      email: '4',
-      password: ''
-    }
-  };
-
-  constructor(props, defaultProps) {
-    super(props, defaultProps);
-    const { image, username, bio, email, password} = props.user;
+  constructor(props) {
+    super(props);
+    const { image, username, bio, email, password } = props.user;
     this.state = {
-      image,
-      username,
-      bio,
-      email,
-      password
+      image: '',
+      username: '',
+      bio: '',
+      email: '',
+      password: ''
     }
   }
 
-  onChangeName = (e) => {
-    const {value} = e.target;
-    this.setState({...this.state, username: value})
+  componentDidMount() {
+    if (Object.keys(this.props.user).length > 0) {
+      const { image, username, bio, email, password } = this.props.user;
+      let pass = password ? password : '';
+      this.setState({
+        image,
+        username,
+        bio,
+        email,
+        password: pass
+      });
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps && nextProps.user) {
+      const { image, username, bio, email, password } = nextProps.user;
+      let pass = password ? password : '';
+      this.setState({
+        image,
+        username,
+        bio,
+        email,
+        password: pass
+      });
+    }
+  }
+
+  onChange = (e) => {
+    const { name, value } = e.target;
+    this.setState({ ...this.state, [name]: value })
   }
 
   render() {
     const { user } = this.props;
-    console.log('username', this.state.username)
     return (
       <div className="settings-page">
         <div className="container page">
@@ -44,48 +61,57 @@ export class Settings extends Component {
 
               <form>
                 <fieldset>
-                    <fieldset className="form-group">
-                      <input
-                        className="form-control"
-                        type="text"
-                        placeholder="URL of profile picture"
-                        defaultValue={this.state.image}
-                      />
-                    </fieldset>
-                    <fieldset className="form-group">
-                      <input
-                        className="form-control form-control-lg"
-                        type="text" placeholder="Your Name"
-                        defaultValue={this.state.username}
-                        onChange={this.onChangeName}
-                      />
-                    </fieldset>
-                    <fieldset className="form-group">
-                      <textarea
-                        className="form-control form-control-lg"
-                        rows="8"
-                        placeholder="Short bio about you"
-                        defaultValue={this.state.bio}
-                      ></textarea>
-                    </fieldset>
-                    <fieldset className="form-group">
-                      <input
-                        className="form-control form-control-lg"
-                        type="text"
-                        placeholder="Email"
-                        defaultValue={this.state.email}
-                      />
-                    </fieldset>
-                    <fieldset className="form-group">
-                      <input
-                        className="form-control form-control-lg"
-                        type="password"
-                        placeholder="Password"
-                        defaultValue={this.state.password}
-                      />
-                    </fieldset>
-                    <button className="btn btn-lg btn-primary pull-xs-right">
-                      Update Settings
+                  <fieldset className="form-group">
+                    <input
+                      className="form-control"
+                      type="text"
+                      name='image'
+                      placeholder="URL of profile picture"
+                      value={this.state.image}
+                      onChange={this.onChange}
+                    />
+                  </fieldset>
+                  <fieldset className="form-group">
+                    <input
+                      className="form-control form-control-lg"
+                      type="text" placeholder="Your Name"
+                      name='username'
+                      value={this.state.username}
+                      onChange={this.onChange}
+                    />
+                  </fieldset>
+                  <fieldset className="form-group">
+                    <textarea
+                      className="form-control form-control-lg"
+                      rows="8"
+                      name='bio'
+                      placeholder="Short bio about you"
+                      value={this.state.bio}
+                      onChange={this.onChange}
+                    ></textarea>
+                  </fieldset>
+                  <fieldset className="form-group">
+                    <input
+                      className="form-control form-control-lg"
+                      type="text"
+                      placeholder="Email"
+                      name='email'
+                      value={this.state.email}
+                      onChange={this.onChange}
+                    />
+                  </fieldset>
+                  <fieldset className="form-group">
+                    <input
+                      className="form-control form-control-lg"
+                      type="password"
+                      name='password'
+                      placeholder="Password"
+                      value={this.state.password}
+                      onChange={this.onChange}
+                    />
+                  </fieldset>
+                  <button className="btn btn-lg btn-primary pull-xs-right">
+                    Update Settings
                     </button>
                 </fieldset>
               </form>
