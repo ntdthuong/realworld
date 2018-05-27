@@ -30,7 +30,7 @@ export class Settings extends Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.user) {
-      const { image, username, bio, email, password } = nextProps.user;
+      const { image, username, bio, email, password } = prevState.username ? prevState : nextProps.user
       return {
         image,
         username,
