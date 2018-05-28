@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { profileAction } from '../../actions';
 import { Input } from '../Share/Input';
-import { Textarea } from './Textarea';
+import { Textarea } from '../Share/Textarea';
 
 export class Settings extends Component {
 
@@ -16,7 +16,8 @@ export class Settings extends Component {
       bio,
       email,
       password
-    }
+    };
+    this.onChange = this.onChange.bind(this)
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -33,24 +34,50 @@ export class Settings extends Component {
     return null;
   }
 
-  // genField = () => {
-  //   console.log('user', this.props.user);
-  //   const { image, username, bio, email } = this.props.user
-  //   let arrField = [];
-  //   arrField.push({name: 'image', type: 'text', placeholder: 'URL of profile picture', value: image});
-  //   return arrField.map((field, index) => <Input key={index} fieldInfo={field} fcChange={this.onChange.bind(this)}/>);
-  // }
-
   onChange = (e) => {
     const { name, value } = e.target;
-    this.setState({ ...this.state, [name]: value })
+    this.setState({ ...this.state, [name]: value });
+  }
+
+  genField = () => {
+    const { username, image, bio, email, password } = this.state;
+    const arrField = [
+      { name: 'image', placeholder: 'URL of profile picture', type: 'text', value: image },
+      { name: 'username', placeholder: 'Username', type: 'text', value: username },
+      { rows: 8, name: 'bio', placeholder: 'Short bio about you', type: 'text', value: bio },
+      { name: 'email', placeholder: 'Email', type: 'email', value: email },
+      { name: 'password', placeholder: 'New Password', type: 'text', value: password }
+    ];
+    return arrField.map(
+      (field, index) => 
+      field.rows
+      ? <Textarea 
+          key={index} 
+          rows={field.rows}
+          name={field.name} 
+          placeholder={field.placeholder} 
+          type={field.type} 
+          value={field.value} 
+          onChange={this.onChange}
+        />
+      : <Input 
+        key={index} 
+        name={field.name} 
+        placeholder={field.placeholder} 
+        type={field.type} 
+        value={field.value} 
+        onChange={this.onChange}
+      />
+    )
   }
 
   handleSumit = (e) => {
     e.preventDefault();
-    // const { value } = e.target;
-    // const user = { user: { image: value } }
-    console.log('handleSumit', this.state);
+    const havePass = {user: {...this.state}};
+    const notPass = {user: {...this.state}};
+    delete notPass.user.password;
+    const userInfo = this.state.password ? havePass : notPass;
+    console.log('handleSumit', userInfo);
   }
 
   render() {
@@ -63,12 +90,7 @@ export class Settings extends Component {
               <h1 className="text-xs-center">Your Settings</h1>
               <form onSubmit={this.handleSumit}>
                 <fieldset>
-                  {/* {this.genField()} */}
-                  <Input name='image' placeholder='image' type='text' value={image} onChange={this.onChange} />
-                  <Input name='username' placeholder='username' type='text' value={username} onChange={this.onChange} />
-                  <Input name='bio' placeholder='bio' type='text' value={bio} onChange={this.onChange} />
-                  <Input name='email' placeholder='email' type='email' value={email} onChange={this.onChange} />
-                  <Input name='password' placeholder='password' type='password' value={password || ''} onChange={this.onChange} />
+                  {this.genField()}
                   <button className="btn btn-lg btn-primary pull-xs-right">
                     Update Settings
                   </button>
