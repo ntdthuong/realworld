@@ -29,6 +29,11 @@ const routes = [
     main: () => <EditorArticleContainer />
   },
   {
+    path: '/editor/:id',
+    exact: true,
+    main: (info) => <EditorArticleContainer info={info}/>
+  },
+  {
     path: '/settings',
     exact: true,
     main: () => <SettingsContainer />
@@ -41,7 +46,7 @@ const routes = [
   {
     path: '/article/:id',
     exact: true,
-    main: () => <ArticleDetailsContainer />
+    main: (info) => <ArticleDetailsContainer info={info}/>
   }
 ];
 export default routes;

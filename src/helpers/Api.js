@@ -4,7 +4,7 @@ import { history } from '../helpers/history';
 const url = 'https://conduit.productionready.io/api/';
 const url_dfArticles = 'articles/';
 const url_articles = 'articles/?limit=10&offset=';
-const url_getUSer = 'user/';
+const url_user = 'user/';
 const url_signUp = 'users/';
 const url_signIn = 'users/login';
 const url_profile = 'profiles/';
@@ -40,7 +40,7 @@ function* matchUserToApi(user) {
 function* getUserfromApi(token) {
   const userInfo = yield axios({
       method: 'get',
-      url: `${url}${url_getUSer}`,
+      url: `${url}${url_user}`,
       headers: {authorization: `Token ${token}`}
     })
     .then(res => {
@@ -57,6 +57,20 @@ function* getProfileFromApi(params) {
   return profile;
 }
 
+function* editProfileToApi(token, userInfo) {
+  const newInfo = yield axios({
+        method: 'put',
+        url: `${url}${url_user}`,
+        data: userInfo,
+        headers: {authorization: `Token ${token}`}
+      })
+      .then(res => {
+        history.push('/');
+        return res.data;
+      })
+  return newInfo;
+}
+
 function* getTagsFromApi() {
   const tags = yield axios.get(`${url}${url_tags}`)
       .then(res => {
@@ -65,7 +79,16 @@ function* getTagsFromApi() {
   return tags;
 }
 
-function* postArticleToApi(article, token) {
+function* getArticleFromApi(id) {
+  const articles = yield axios.get(`${url}${url_dfArticles}${id}`)
+      .then(res => {
+        console.log('article', res.data)
+        return res.data;
+      })
+  return articles;
+}
+
+function* postArticleToApi(token, article) {
   const recievedArticle = yield axios({
         method: 'post',
         url: `${url}${url_dfArticles}`,
@@ -74,6 +97,7 @@ function* postArticleToApi(article, token) {
       })
       .then(res => {
         console.log(res.data)
+        history.push('/');
         return res.data.article;
       })
   return recievedArticle;
@@ -81,10 +105,12 @@ function* postArticleToApi(article, token) {
 
 export const Api = {
   getArticlesFromApi,
+  getArticleFromApi,
   postArticleToApi,
   getTagsFromApi,
   getUserfromApi,
   postUserToApi,
   matchUserToApi,
-  getProfileFromApi
+  getProfileFromApi,
+  editProfileToApi
 }

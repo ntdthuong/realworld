@@ -8,7 +8,7 @@ export class ArticlePreview extends Component {
     return new Intl.DateTimeFormat('en-Asia', options).format(date);
   }
   handleClick = (username) => {
-    const { articleInfo, onGetProfile } = this.props;
+    const { onGetProfile } = this.props;
     onGetProfile(username);
   }
   render() {

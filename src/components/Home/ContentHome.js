@@ -12,7 +12,6 @@ export class ContentHome extends Component {
   }
   render() {
     const { articles, onFetchPaging, onGetProfile, tags } = this.props;
-    // console.log('a',this.props.info)
     return (
       <div className="home-page">
         {this.genBanner()}

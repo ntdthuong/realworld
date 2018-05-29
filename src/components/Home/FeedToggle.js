@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
+import { NavTab } from '../Common/NavTab'
 
 export class FeedToggle extends Component {
+
+  // genTab = () => {
+
+  // }
+
   render() {
     return (
       <div className="feed-toggle">
         <ul className="nav nav-pills outline-active">
-          <li className="nav-item">
-            <a className="nav-link active" href="">Global Feed</a>
-          </li>
+          <NavTab />
         </ul>
       </div>
     );

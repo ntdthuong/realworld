@@ -1,5 +1,5 @@
 import { put, takeLatest } from 'redux-saga/effects';
-import { signUpSuccessAction, fetchFailedAction } from '../actions';
+import { signUpSuccessAction, userFailedAction } from '../actions';
 import {
   SIGN_UP
 } from '../actions/actionTypes';
@@ -12,7 +12,7 @@ export function* signUpUser(user) {
     const recievedUser = yield Api.getUserfromApi(localStorage.getItem('jwt'));
     yield put(signUpSuccessAction(recievedUser));
   } catch (error) {
-    yield put(fetchFailedAction(error.response.data));
+    yield put(userFailedAction(error.response.data));
   }
 }
 

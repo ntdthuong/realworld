@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import { Switch, Route, Router } from 'react-router-dom';
 import { history } from '../helpers/history';
 
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
-import { profileAction } from '../actions';
+import { Header } from '../components/Common/Header';
+import { Footer } from '../components/Common/Footer';
 
 import routes from '../helpers/routes';
 

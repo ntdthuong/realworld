@@ -1,6 +1,7 @@
+import React from 'react';
 import { connect } from 'react-redux';
 
-import { profileAction } from '../actions';
+import { profileAction, editProfileAction } from '../actions';
 import { Settings } from '../components/Settings/Settings';
 
 const mapStateToProps = (state) => {
@@ -14,6 +15,18 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     onGetProfile: (username) => {
       dispatch(profileAction(username));
+    },
+    onEditProfile: (userInfo) => {
+      dispatch(editProfileAction(userInfo));
+    },
+    onGenErrors: (errors) => {
+      let arrError = []
+      if(errors) {
+        for(let key in errors) {
+          arrError.push(<li key={key}>{`${key} ${errors[key]}`}</li>)
+        }
+        return  <ul className="error-messages">{arrError}</ul>
+      }
     }
   }
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { signUpAction } from '../actions';
-import { SignUp } from '../components/SignUp';
+import { SignUp } from '../components/User/SignUp';
 
 
 const mapStateToProps = (state) => {

@@ -1,5 +1,5 @@
-import { put, takeLatest } from 'redux-saga/effects';
-import { tagsSuccessAction, fetchFailedAction } from '../actions';
+import { put } from 'redux-saga/effects';
+import { tagsSuccessAction, tagsFailedAction } from '../actions';
 import { Api } from '../helpers/Api';
 
 export function* fetchTags() {
@@ -7,7 +7,6 @@ export function* fetchTags() {
     const tags = yield Api.getTagsFromApi();
     yield put(tagsSuccessAction(tags));
   } catch (error) {
-    yield put(fetchFailedAction(error.response.data));
+    yield put(tagsFailedAction(error));
   }
 }
-

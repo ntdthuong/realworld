@@ -1,18 +1,21 @@
 import { connect } from 'react-redux';
 
-import { } from '../actions';
-import { ArticleDetails } from '../components/ArticleDetails';
+import { fetchArticleAction } from '../actions';
+import { ArticleDetails } from '../components/Articles/ArticleDetails';
 
 const mapStateToProps = (state) => {
   return {
     articles: state.articles,
+    article: state.article,
     user: state.user
   }
 };
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-
+    onGetArticle: (id) => {
+      dispatch(fetchArticleAction(id));
+    }
   }
 };
 
