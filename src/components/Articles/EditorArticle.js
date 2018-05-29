@@ -7,16 +7,24 @@ export class EditorArticle extends Component {
 
   constructor(props) {
     super(props);
-    const { id } = this.props.info.match.params;
-    if(id) this.props.onGetArticle(id);
-    const { title, description, body, tagList } = this.props.article;
-    this.state = {
-      title,
-      description,
-      body,
-      tagList
+    const { id } = this.props.info?this.props.info.match.params:'';
+    if(id) {
+      this.props.onGetArticle(id);
+      const { title, description, body, tagList } = this.props.article;
+      this.state = {
+        title,
+        description,
+        body,
+        tagList
+      }
+    } else {
+      this.state = {
+        title: '',
+        description: '',
+        body: '',
+        tagList:''
+      }
     }
-    console.log('article', this.props.article);
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -29,6 +37,7 @@ export class EditorArticle extends Component {
         tagList
       };
     }
+
     return null;
   }
 
