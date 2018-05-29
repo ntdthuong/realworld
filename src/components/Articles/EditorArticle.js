@@ -7,12 +7,29 @@ export class EditorArticle extends Component {
 
   constructor(props) {
     super(props);
+    const { id } = this.props.info.match.params;
+    if(id) this.props.onGetArticle(id);
+    const { title, description, body, tagList } = this.props.article;
     this.state = {
-      title: '',
-      description: '',
-      body: '',
-      tagList: []
+      title,
+      description,
+      body,
+      tagList
     }
+    console.log('article', this.props.article);
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps && nextProps.article) {
+      const { title, description, body, tagList } = (prevState.title !== undefined) ? prevState : nextProps.article;
+      return {
+        title,
+        description,
+        body,
+        tagList
+      };
+    }
+    return null;
   }
 
   genField = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { addArticleAction } from '../actions';
+import { addArticleAction, fetchArticleAction } from '../actions';
 import { EditorArticle } from '../components/Articles/EditorArticle';
 
 const mapStateToProps = (state) => {
@@ -25,6 +25,9 @@ const mapDispatchToProps = (dispatch, props) => {
         }
         return  <ul className="error-messages">{arrError}</ul>
       }
+    },
+    onGetArticle: (id) => {
+      dispatch(fetchArticleAction(id));
     }
   }
 };

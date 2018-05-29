@@ -4,13 +4,13 @@ export class ArticleDetails extends Component {
   constructor(props) {
     super(props);
     this.props.onGetArticle(this.props.info.match.params.id);
+    console.log('article', this.props.article);
   }
   genTag = (tags) => {
     if(tags) return tags.map((tag, index) => <li key={index} className="tag-default tag-pill tag-outline">{tag}</li>)
   }
-  formatDate = () => {
-    const { createdAt } = this.props.article;
-    const date = new Date(createdAt);
+  formatDate = (originDate) => {
+    const date = new Date(originDate);
     const options = { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' };
     return new Intl.DateTimeFormat('en-Asia', options).format(date);
   }
@@ -18,7 +18,6 @@ export class ArticleDetails extends Component {
   render() {
     const { id } = this.props.info.match.params;
     const { article } = this.props;
-    console.log('article', article)
     return (
       <div className="article-page">
 
