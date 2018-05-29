@@ -79,7 +79,9 @@ export class EditorArticle extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const articleInfo = {article: {...this.state}};
+    let tagList = this.state.tagList.split(',');
+    tagList = tagList.map((tag, index) => tag.trim());
+    const articleInfo = {article: {...this.state, tagList}};
     const { onAddArticle } = this.props;
     console.log('state', articleInfo)
     onAddArticle(articleInfo);
