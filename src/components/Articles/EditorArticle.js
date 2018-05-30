@@ -7,8 +7,8 @@ export class EditorArticle extends Component {
 
   constructor(props) {
     super(props);
-    const { id } = this.props.info?this.props.info.match.params:'';
-    if(id) {
+    const { id } = this.props.info ? this.props.info.match.params : '';
+    if (id) {
       this.props.onGetArticle(id);
       const { title, description, body, tagList } = this.props.article;
       this.state = {
@@ -22,7 +22,7 @@ export class EditorArticle extends Component {
         title: '',
         description: '',
         body: '',
-        tagList:''
+        tagList: ''
       }
     }
   }
@@ -51,24 +51,24 @@ export class EditorArticle extends Component {
     ];
     return arrField.map(
       (field, index) =>
-      field.rows
-      ? <Textarea
-          key={index}
-          rows={field.rows}
-          name={field.name}
-          placeholder={field.placeholder}
-          type={field.type}
-          value={field.value}
-          onChange={this.onChange}
-        />
-      : <Input
-        key={index}
-        name={field.name}
-        placeholder={field.placeholder}
-        type={field.type}
-        value={field.value}
-        onChange={this.onChange}
-      />
+        field.rows
+          ? <Textarea
+            key={index}
+            rows={field.rows}
+            name={field.name}
+            placeholder={field.placeholder}
+            type={field.type}
+            value={field.value}
+            onChange={this.onChange}
+          />
+          : <Input
+            key={index}
+            name={field.name}
+            placeholder={field.placeholder}
+            type={field.type}
+            value={field.value}
+            onChange={this.onChange}
+          />
     )
   }
 
@@ -79,11 +79,13 @@ export class EditorArticle extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    let tagList = this.state.tagList.split(',');
+    let tagList = this.state.tagList;
+    if (!Array.isArray(tagList)) {
+      tagList = tagList.split(',');
+    }
     tagList = tagList.map((tag, index) => tag.trim());
-    const articleInfo = {article: {...this.state, tagList}};
+    const articleInfo = { article: { ...this.state, tagList } };
     const { onAddArticle } = this.props;
-    console.log('state', articleInfo)
     onAddArticle(articleInfo);
   }
 
@@ -104,7 +106,7 @@ export class EditorArticle extends Component {
                   {this.genField()}
 
                   <button className="btn btn-lg pull-xs-right btn-primary" type="submit">
-                      Publish Article
+                    Publish Article
                   </button>
                 </fieldset>
               </form>
