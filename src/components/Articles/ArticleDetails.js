@@ -3,12 +3,12 @@ import React, { Component } from 'react';
 export class ArticleDetails extends Component {
   constructor(props) {
     super(props);
-    console.log('props111', this.props);
     this.props.onGetArticle(this.props.info.match.params.id);
     console.log('article', this.props.article);
   }
+
   genTag = (tags) => {
-    if (tags) return tags.map((tag, index) => <li key={index} className="tag-default tag-pill tag-outline">{tag}</li>)
+    if(tags) return tags.map((tag, index) => <li key={index} className="tag-default tag-pill tag-outline">{tag}</li>)
   }
 
   formatDate = (originDate) => {
@@ -22,7 +22,6 @@ export class ArticleDetails extends Component {
   render() {
     const { id } = this.props.info.match.params;
     const { article } = this.props;
-    console.log('aricle',article);
     const { username } = article.author ? article.author : '';
     return (
       <div className="article-page">
@@ -33,7 +32,7 @@ export class ArticleDetails extends Component {
             <h1>{article.title}</h1>
 
             <div className="article-meta">
-              <a href=""><img src="http://i.imgur.com/Qr71crq.jpg" alt="img article" /></a>
+              <a href=""><img src="http://i.imgur.com/Qr71crq.jpg" alt="img article"/></a>
               <div className="info">
                 <a href="" className="author">{username}</a>
                 <span className="date">{this.formatDate(article.createdAt)}</span>
@@ -51,7 +50,6 @@ export class ArticleDetails extends Component {
         </div>
 
         <div className="container page">
-
           <div className="row article-content">
             <div className="col-md-12">
               <div>
@@ -62,34 +60,27 @@ export class ArticleDetails extends Component {
               </ul>
             </div>
           </div>
-
           <hr />
-
-
-
           <div className="row">
-
             <div className="col-xs-12 col-md-8 offset-md-2">
-
               <form className="card comment-form">
                 <div className="card-block">
                   <textarea className="form-control" placeholder="Write a comment..." rows="3"></textarea>
                 </div>
                 <div className="card-footer">
-                  <img src="http://i.imgur.com/Qr71crq.jpg" className="comment-author-img" alt="img user" />
+                  <img src="http://i.imgur.com/Qr71crq.jpg" className="comment-author-img" alt="img user"/>
                   <button className="btn btn-sm btn-primary">
-                    Post Comment
+                  Post Comment
                   </button>
                 </div>
               </form>
-
               <div className="card">
                 <div className="card-block">
                   <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
                 </div>
                 <div className="card-footer">
                   <a href="" className="comment-author">
-                    <img src="http://i.imgur.com/Qr71crq.jpg" className="comment-author-img" alt="img user" />
+                    <img src="http://i.imgur.com/Qr71crq.jpg" className="comment-author-img" alt="img user"/>
                   </a>
                   &nbsp;
                   <a href="" className="comment-author">Jacob Schmidt</a>
@@ -103,7 +94,7 @@ export class ArticleDetails extends Component {
                 </div>
                 <div className="card-footer">
                   <a href="" className="comment-author">
-                    <img src="http://i.imgur.com/Qr71crq.jpg" className="comment-author-img" alt="img user" />
+                    <img src="http://i.imgur.com/Qr71crq.jpg" className="comment-author-img" alt="img user"/>
                   </a>
                   &nbsp;
                   <a href="" className="comment-author">Jacob Schmidt</a>

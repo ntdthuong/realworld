@@ -6,10 +6,16 @@ export class ArticlePreview extends Component {
     const options = { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' };
     return new Intl.DateTimeFormat('en-Asia', options).format(date);
   }
+
+  genTag = (tags) => {
+    if(tags) return tags.map((tag, index) => <li key={index} className="tag-default tag-pill tag-outline">{tag}</li>)
+  }
+
   handleClick = (username) => {
     const { onGetProfile } = this.props;
     onGetProfile(username);
   }
+
   render() {
     const { articleInfo } = this.props;
     return (
@@ -31,8 +37,11 @@ export class ArticlePreview extends Component {
         </div>
         <a href={`/article/${articleInfo.slug}`} className="preview-link">
           <h1>{articleInfo.title}</h1>
-          <p>{articleInfo.body}</p>
+          <p>{articleInfo.description}</p>
           <span>Read more...</span>
+          <ul className="tag-list">
+            {this.genTag(articleInfo.tagList)}
+          </ul>
         </a>
       </div>
     );

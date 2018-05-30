@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { addArticleAction, fetchArticleAction } from '../actions';
+import { editorArticleAction, fetchArticleAction } from '../actions';
 import { EditorArticle } from '../components/Articles/EditorArticle';
 
 const mapStateToProps = (state) => {
@@ -14,8 +14,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    onAddArticle: (article) => {
-      dispatch(addArticleAction(article));
+    onEditorArticle: (article, id) => {
+      dispatch(editorArticleAction(article, id));
+      console.log(editorArticleAction(article, id))
     },
     onGenErrors: (errors) => {
       let arrError = []

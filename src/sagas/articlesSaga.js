@@ -10,7 +10,7 @@ import {
 } from '../actions';
 import {
   FETCH_PAGING,
-  ADD_ARTICLE,
+  EDITOR_ARTICLE,
   FETCH_ARTICLE
 } from '../actions/actionTypes';
 import { Api } from '../helpers/Api';
@@ -44,7 +44,8 @@ export function* watchFetchArticle() {
 export function* editorArticle(action) {
   try {
     const token = yield localStorage.getItem('jwt');
-    const article = yield Api.postArticleToApi(token, action.article);
+    const { data, id } = action.article;
+    const article = id ? yield Api.putArticleToApi(token, data, id) : yield Api.postArticleToApi(token, data);
     yield put(editorArticleSuccessAction(article));
     yield put(fetchPagingAction());
   } catch (error) {
@@ -53,5 +54,5 @@ export function* editorArticle(action) {
 }
 
 export function* watchEditorArticle() {
-  yield takeLatest(ADD_ARTICLE, editorArticle)
+  yield takeLatest(EDITOR_ARTICLE, editorArticle)
 }

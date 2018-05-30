@@ -7,8 +7,8 @@ export class EditorArticle extends Component {
 
   constructor(props) {
     super(props);
-    const { id } = this.props.info ? this.props.info.match.params : '';
-    if (id) {
+    const { id } = this.props.info?this.props.info.match.params:'';
+    if(id) {
       this.props.onGetArticle(id);
       const { title, description, body, tagList } = this.props.article;
       this.state = {
@@ -22,7 +22,7 @@ export class EditorArticle extends Component {
         title: '',
         description: '',
         body: '',
-        tagList: ''
+        tagList:''
       }
     }
   }
@@ -37,7 +37,6 @@ export class EditorArticle extends Component {
         tagList
       };
     }
-
     return null;
   }
 
@@ -51,24 +50,24 @@ export class EditorArticle extends Component {
     ];
     return arrField.map(
       (field, index) =>
-        field.rows
-          ? <Textarea
-            key={index}
-            rows={field.rows}
-            name={field.name}
-            placeholder={field.placeholder}
-            type={field.type}
-            value={field.value}
-            onChange={this.onChange}
-          />
-          : <Input
-            key={index}
-            name={field.name}
-            placeholder={field.placeholder}
-            type={field.type}
-            value={field.value}
-            onChange={this.onChange}
-          />
+      field.rows
+      ? <Textarea
+          key={index}
+          rows={field.rows}
+          name={field.name}
+          placeholder={field.placeholder}
+          type={field.type}
+          value={field.value}
+          onChange={this.onChange}
+        />
+      : <Input
+        key={index}
+        name={field.name}
+        placeholder={field.placeholder}
+        type={field.type}
+        value={field.value}
+        onChange={this.onChange}
+      />
     )
   }
 
@@ -85,13 +84,23 @@ export class EditorArticle extends Component {
     }
     tagList = tagList.map((tag, index) => tag.trim());
     const articleInfo = { article: { ...this.state, tagList } };
-    const { onAddArticle } = this.props;
-    onAddArticle(articleInfo);
+    const { onEditorArticle } = this.props;
+    const { id } = this.props.info?this.props.info.match.params:'';
+    onEditorArticle(articleInfo, id);
   }
 
   handleError = () => {
     const { onGenErrors, article } = this.props;
     return onGenErrors(article.errors);
+  }
+
+  genTag = (tags) => {
+    if(tags) return tags.map((tag, index) =>
+      <span key={index} class="tag-default tag-pill">
+        <i class="ion-close-round"></i>
+        {tag}
+      </span>
+    )
   }
 
   render() {
@@ -104,9 +113,21 @@ export class EditorArticle extends Component {
               <form onSubmit={this.handleSubmit}>
                 <fieldset>
                   {this.genField()}
-
+                  {/*<fieldset className="form-group">
+                    <input
+                      className="form-control form-control-lg"
+                      type='text'
+                      name='tagList'
+                      placeholder='Enter tags'
+                      value={this.state.tagList || ''}
+                      onChange={this.props.onChange}
+                    />
+                    <div class="tag-list">
+                      {this.genTag(this.state.tagList)}
+                    </div>
+                  </fieldset>*/}
                   <button className="btn btn-lg pull-xs-right btn-primary" type="submit">
-                    Publish Article
+                      Publish Article
                   </button>
                 </fieldset>
               </form>

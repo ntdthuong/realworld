@@ -103,10 +103,26 @@ function* postArticleToApi(token, article) {
   return recievedArticle;
 }
 
+function* putArticleToApi(token, article, id) {
+  const recievedArticle = yield axios({
+        method: 'put',
+        url: `${url}${url_dfArticles}${id}`,
+        data: article,
+        headers: {authorization: `Token ${token}`}
+      })
+      .then(res => {
+        console.log(res.data)
+        history.push('/');
+        return res.data.article;
+      })
+  return recievedArticle;
+}
+
 export const Api = {
   getArticlesFromApi,
   getArticleFromApi,
   postArticleToApi,
+  putArticleToApi,
   getTagsFromApi,
   getUserfromApi,
   postUserToApi,

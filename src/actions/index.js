@@ -8,8 +8,7 @@ import {
   FETCH_ARTICLE_SUCCEEDED,
   FETCH_ARTICLE_FAILED,
 
-  ADD_ARTICLE,
-  EDIT_ARTICLE,
+  EDITOR_ARTICLE,
   EDITOR_ARTICLE_SUCCEEDED,
   EDITOR_ARTICLE_FAILED,
 
@@ -83,10 +82,10 @@ export const fetchPagingAction = (page) => {
 //     error
 //   }
 // }
-export const addArticleAction = (article) => {
+export const editorArticleAction = (data, id) => {
   return {
-    type: ADD_ARTICLE,
-    article
+    type: EDITOR_ARTICLE,
+    article: {data, id}
   }
 }
 export const editorArticleSuccessAction = (receivedArticle) => {
