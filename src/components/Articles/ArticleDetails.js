@@ -4,7 +4,6 @@ export class ArticleDetails extends Component {
   constructor(props) {
     super(props);
     this.props.onGetArticle(this.props.info.match.params.id);
-    console.log('article', this.props.article);
   }
 
   genTag = (tags) => {
@@ -22,17 +21,14 @@ export class ArticleDetails extends Component {
   render() {
     const { id } = this.props.info.match.params;
     const { article } = this.props;
-    const { username } = article.author ? article.author : '';
+    const { username, image } = article.author ? article.author : '';
     return (
       <div className="article-page">
-
         <div className="banner">
           <div className="container">
-
             <h1>{article.title}</h1>
-
             <div className="article-meta">
-              <a href=""><img src="http://i.imgur.com/Qr71crq.jpg" alt="img article"/></a>
+              <a href=""><img src={image} alt="img"/></a>
               <div className="info">
                 <a href="" className="author">{username}</a>
                 <span className="date">{this.formatDate(article.createdAt)}</span>

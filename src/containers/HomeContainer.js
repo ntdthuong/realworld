@@ -1,6 +1,11 @@
 import { connect } from 'react-redux';
 
-import { fetchPagingAction, profileAction } from '../actions';
+import {
+  fetchPagingAction,
+  profileAction,
+  fetchArticleByTagAction,
+  fetchArticleByUserAction
+} from '../actions';
 import { ContentHome } from '../components/Home/ContentHome';
 
 const mapStateToProps = (state) => {
@@ -19,6 +24,12 @@ const mapDispatchToProps = (dispatch, props) => {
     },
     onGetProfile: (username) => {
       dispatch(profileAction(username));
+    },
+    onFetchArticleByTag: (tag) => {
+      dispatch(fetchArticleByTagAction(tag));
+    },
+    onFetchArticleByUser: (token) => {
+      dispatch(fetchArticleByUserAction(token));
     }
   }
 };

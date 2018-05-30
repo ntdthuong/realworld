@@ -79,10 +79,33 @@ function* getTagsFromApi() {
   return tags;
 }
 
+function* getArticlesByTag(tag, params) {
+  const sub = params ? `${params}` : '0';
+  const articles = yield axios.get(`${url}articles?tag=${tag}&limit=10&offset=${sub}`)
+      .then(res => {
+        return res.data;
+      })
+  return articles;
+}
+
+function* getArticlesByUser(token, params) {
+  const sub = params ? `${params}` : '0';
+  const articles = yield axios({
+    method: 'get',
+    url: `${url}${url_dfArticles}feed?limit=10&offset=${sub}`,
+    headers: {authorization: `Token ${token}`}
+  })
+  .then(res => {
+    console.log(res.data)
+    history.push('/');
+    return res.data;
+  })
+  return articles;
+}
+
 function* getArticleFromApi(id) {
   const articles = yield axios.get(`${url}${url_dfArticles}${id}`)
       .then(res => {
-        console.log('article', res.data)
         return res.data;
       })
   return articles;
@@ -96,7 +119,6 @@ function* postArticleToApi(token, article) {
         headers: {authorization: `Token ${token}`}
       })
       .then(res => {
-        console.log(res.data)
         history.push('/');
         return res.data.article;
       })
@@ -111,7 +133,6 @@ function* putArticleToApi(token, article, id) {
         headers: {authorization: `Token ${token}`}
       })
       .then(res => {
-        console.log(res.data)
         history.push('/');
         return res.data.article;
       })
@@ -124,6 +145,8 @@ export const Api = {
   postArticleToApi,
   putArticleToApi,
   getTagsFromApi,
+  getArticlesByTag,
+  getArticlesByUser,
   getUserfromApi,
   postUserToApi,
   matchUserToApi,

@@ -1,5 +1,5 @@
 import {
-  FETCH_ARTICLES,
+  // FETCH_ARTICLES,
   FETCH_ARTICLES_SUCCEEDED,
   FETCH_ARTICLES_FAILED,
   FETCH_PAGING,
@@ -12,8 +12,8 @@ import {
   EDITOR_ARTICLE_SUCCEEDED,
   EDITOR_ARTICLE_FAILED,
 
-  FETCH_SUCCEEDED,
-  FETCH_FAILED,
+  // FETCH_SUCCEEDED,
+  // FETCH_FAILED,
 
   SIGN_UP,
   SIGN_UP_SUCCESS,
@@ -29,6 +29,10 @@ import {
   EDIT_PROFILE_SUCCESS,
   EDIT_PROFILE_FAILED,
 
+  FETCH_ARTICLES_BY_TAG,
+  FETCH_ARTICLES_BY_TAG_SUCCEEDED,
+  FETCH_ARTICLES_BY_USER,
+  FETCH_ARTICLES_BY_USER_SUCCEEDED,
   FETCH_TAGS_SUCCEEDED,
   FETCH_TAGS_FAILED,
 } from './actionTypes';
@@ -170,6 +174,30 @@ export const editProfileFailedAction = (error) => {
   }
 }
 
+export const fetchArticleByTagAction = (tag, page) => {
+  return {
+    type: FETCH_ARTICLES_BY_TAG,
+    tagInfo: {tag, page}
+  }
+}
+export const fetchArticlesByTagSuccessAction = (receivedArticles, tag) => {
+  return {
+    type: FETCH_ARTICLES_BY_TAG_SUCCEEDED,
+    articles: {receivedArticles, tag}
+  }
+}
+export const fetchArticleByUserAction = (page) => {
+  return {
+    type: FETCH_ARTICLES_BY_USER,
+    page
+  }
+}
+export const fetchArticlesByUserSuccessAction = (receivedArticles, tag) => {
+  return {
+    type: FETCH_ARTICLES_BY_USER_SUCCEEDED,
+    receivedArticles
+  }
+}
 export const tagsSuccessAction = (receivedTags) => {
   return {
     type: FETCH_TAGS_SUCCEEDED,

@@ -1,6 +1,11 @@
 import { call, all } from 'redux-saga/effects';
-import { fetchArticles, watchFetchArticles, watchFetchArticle, watchEditorArticle } from './articlesSaga';
-import { fetchTags } from './tagsSaga';
+import {
+  fetchArticles,
+  watchFetchArticles,
+  watchFetchArticle,
+  watchEditorArticle,
+  watchFetchArticlesByUser } from './articlesSaga';
+import { fetchTags, watchFetchArticlesByTag } from './tagsSaga';
 import { watchSignUpUser } from './signUpSaga';
 import { watchSignInUser, getUser, watchGetUser } from './signInSaga';
 import { watchFetchProfile, watchEditProfile } from './profileSaga';
@@ -17,6 +22,8 @@ export default function* rootSaga() {
     call(fetchTags),
     call(watchEditProfile),
     call(watchFetchArticle),
-    call(watchEditorArticle)
+    call(watchEditorArticle),
+    call(watchFetchArticlesByTag),
+    call(watchFetchArticlesByUser)
   ])
 }

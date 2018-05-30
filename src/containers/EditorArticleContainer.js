@@ -16,7 +16,6 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     onEditorArticle: (article, id) => {
       dispatch(editorArticleAction(article, id));
-      console.log(editorArticleAction(article, id))
     },
     onGenErrors: (errors) => {
       let arrError = []

@@ -113,19 +113,6 @@ export class EditorArticle extends Component {
               <form onSubmit={this.handleSubmit}>
                 <fieldset>
                   {this.genField()}
-                  {/*<fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type='text'
-                      name='tagList'
-                      placeholder='Enter tags'
-                      value={this.state.tagList || ''}
-                      onChange={this.props.onChange}
-                    />
-                    <div class="tag-list">
-                      {this.genTag(this.state.tagList)}
-                    </div>
-                  </fieldset>*/}
                   <button className="btn btn-lg pull-xs-right btn-primary" type="submit">
                       Publish Article
                   </button>

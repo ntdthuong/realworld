@@ -6,12 +6,14 @@ import {
   fetchArticleSuccessAction,
   fetchArticleFailedAction,
   editorArticleSuccessAction,
-  editorArticleFailedAction
+  editorArticleFailedAction,
+  fetchArticlesByUserSuccessAction
 } from '../actions';
 import {
   FETCH_PAGING,
   EDITOR_ARTICLE,
-  FETCH_ARTICLE
+  FETCH_ARTICLE,
+  FETCH_ARTICLES_BY_USER
 } from '../actions/actionTypes';
 import { Api } from '../helpers/Api';
 
@@ -55,4 +57,19 @@ export function* editorArticle(action) {
 
 export function* watchEditorArticle() {
   yield takeLatest(EDITOR_ARTICLE, editorArticle)
+}
+
+export function* fetchArticlesByUser(action) {
+  try {
+    const token = localStorage.getItem('jwt');
+    const articleRecieved = yield Api.getArticlesByUser(token);
+    yield put(fetchArticlesByUserSuccessAction(articleRecieved));
+  } catch (error) {
+    console.log('error', error.response.data);
+    // yield put(fetchArticlesFailedAction(error.response.data));
+  }
+}
+
+export function* watchFetchArticlesByUser() {
+  yield takeLatest(FETCH_ARTICLES_BY_USER, fetchArticlesByUser)
 }

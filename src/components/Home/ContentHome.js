@@ -11,14 +11,19 @@ export class ContentHome extends Component {
     if(!user) return <Banner />
   }
   render() {
-    const { articles, onFetchPaging, onGetProfile, tags } = this.props;
+    const { articles, onFetchPaging, onGetProfile, tags, onFetchArticleByTag, onFetchArticleByUser, user } = this.props;
     return (
       <div className="home-page">
         {this.genBanner()}
         <div className="container page">
           <div className="row">
             <div className="col-md-9">
-              <FeedToggle />
+              <FeedToggle
+                user={user}
+                articleTag={articles.tag ? articles.tag : ''}
+                onFetchPaging={onFetchPaging}
+                onFetchArticleByUser={onFetchArticleByUser}
+              />
               <ListArticlePreview
                 articles={articles.articles}
                 articlesCount={articles.articlesCount}
@@ -27,7 +32,7 @@ export class ContentHome extends Component {
               />
             </div>
             <div className="col-md-3">
-              <Tags tags={tags}/>
+              <Tags tags={tags} onFetchArticleByTag={onFetchArticleByTag}/>
             </div>
           </div>
         </div>
