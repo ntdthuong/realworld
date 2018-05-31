@@ -10,7 +10,6 @@ export function articleReducer(state = {} , action) {
     case FETCH_ARTICLE_SUCCEEDED:
       return action.receivedArticle;
     case EDITOR_ARTICLE_SUCCEEDED:
-      console.log('post', action.receivedArticle)
       return action.receivedArticle;
     case FETCH_ARTICLE_FAILED:
       return action.error;

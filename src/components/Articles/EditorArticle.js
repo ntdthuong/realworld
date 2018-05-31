@@ -22,7 +22,7 @@ export class EditorArticle extends Component {
         title: '',
         description: '',
         body: '',
-        tagList:''
+        tagList:'',
       }
     }
   }
@@ -34,7 +34,7 @@ export class EditorArticle extends Component {
         title,
         description,
         body,
-        tagList
+        tagList,
       };
     }
     return null;

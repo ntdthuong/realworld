@@ -15,6 +15,7 @@ export class ListArticlePreview extends Component {
       if(!articles.length) return <div className="article-preview">No articles are here... yet.</div>
     }
   }
+
   render() {
     const {
       articlesCount,
@@ -24,6 +25,7 @@ export class ListArticlePreview extends Component {
       articleTag,
       onFetchArticleByTag
     } = this.props;
+
     return (
       <div>
         {this.genList()}

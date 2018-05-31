@@ -19,6 +19,7 @@ export class Tags extends Component {
       >{tag}</a>
     );
   }
+
   render() {
     return (
       <div className="sidebar">

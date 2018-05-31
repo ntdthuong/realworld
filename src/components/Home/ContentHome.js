@@ -17,6 +17,7 @@ export class ContentHome extends Component {
     const { user } = this.props;
     if(!user) return <Banner />
   }
+
   render() {
     const { articles, onFetchPaging, onGetProfile, tags, onFetchArticleByTag, onFetchArticleByUser, user } = this.props;
     return (

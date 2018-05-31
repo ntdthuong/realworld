@@ -4,8 +4,7 @@ import {
   fetchPagingAction,
   profileAction,
   fetchArticleByTagAction,
-  fetchArticleByUserAction,
-  onFetchArticleByUser
+  fetchArticleByUserAction
 } from '../actions';
 import { ContentHome } from '../components/Home/ContentHome';
 

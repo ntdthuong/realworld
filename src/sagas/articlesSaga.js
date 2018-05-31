@@ -19,7 +19,7 @@ import { Api } from '../helpers/Api';
 
 function* fetchArticles(action) {
   try {
-    const articles = action ? yield Api.getArticlesFromApi(action.page*10) : yield Api.getArticlesFromApi();
+    const articles = action ? yield Api.getArticlesFromApi(action.page) : yield Api.getArticlesFromApi();
     yield put(fetchArticlesSuccessAction(articles));
   } catch (error) {
     yield put(fetchArticlesFailedAction(error));
