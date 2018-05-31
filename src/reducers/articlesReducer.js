@@ -8,11 +8,11 @@ import {
 export function articlesReducer(state = {} , action) {
   switch(action.type) {
     case FETCH_ARTICLES_SUCCEEDED:
-      return action.receivedArticles;
+      return {...action.receivedArticles, pageNow: 'global'};
     case FETCH_ARTICLES_BY_USER_SUCCEEDED:
-      return action.receivedArticles;
+      return {...action.receivedArticles, pageNow: 'feed'};
     case FETCH_ARTICLES_BY_TAG_SUCCEEDED:
-      const articles = {...action.articles.receivedArticles, tag: action.articles.tag};
+      const articles = {...action.articles.receivedArticles, tag: action.articles.tag, pageNow: 'tag'};
       return articles;
     case FETCH_ARTICLES_FAILED:
       return [];

@@ -96,7 +96,6 @@ function* getArticlesByUser(token, params) {
     headers: {authorization: `Token ${token}`}
   })
   .then(res => {
-    console.log(res.data)
     history.push('/');
     return res.data;
   })
@@ -119,7 +118,7 @@ function* postArticleToApi(token, article) {
         headers: {authorization: `Token ${token}`}
       })
       .then(res => {
-        history.push('/');
+        history.push(`/article/${res.data.article.slug}`);
         return res.data.article;
       })
   return recievedArticle;
@@ -133,7 +132,7 @@ function* putArticleToApi(token, article, id) {
         headers: {authorization: `Token ${token}`}
       })
       .then(res => {
-        history.push('/');
+        history.push(`/article/${res.data.article.slug}`);
         return res.data.article;
       })
   return recievedArticle;

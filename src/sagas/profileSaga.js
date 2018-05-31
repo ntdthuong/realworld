@@ -4,7 +4,7 @@ import { profileSuccessAction, profileFailedAction, editProfileSuccessAction, ed
 import { FETCH_PROFILE, EDIT_PROFILE } from '../actions/actionTypes';
 import { Api } from '../helpers/Api';
 
-export function* fetchProfile(action) {
+function* fetchProfile(action) {
   try {
     const profile = yield Api.getProfileFromApi(action.username);
     yield put(profileSuccessAction(profile));
@@ -17,7 +17,7 @@ export function* watchFetchProfile() {
   yield takeLatest(FETCH_PROFILE, fetchProfile)
 }
 
-export function* editProfile(action) {
+function* editProfile(action) {
   try {
     const token = localStorage.getItem('jwt');
     const profile = yield Api.editProfileToApi(token, action.userInfo);

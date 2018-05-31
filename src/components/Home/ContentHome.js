@@ -6,6 +6,13 @@ import { ListArticlePreview } from './ListArticlePreview';
 import { Tags } from './Tags';
 
 export class ContentHome extends Component {
+  constructor(props) {
+    super(props);
+    const token = localStorage.getItem('jwt');
+    const { onFetchArticleByUser, onFetchPaging } = this.props;
+    token ? onFetchArticleByUser(`Token ${token}`) : onFetchPaging();
+  }
+
   genBanner = () => {
     const { user } = this.props;
     if(!user) return <Banner />
@@ -20,6 +27,7 @@ export class ContentHome extends Component {
             <div className="col-md-9">
               <FeedToggle
                 user={user}
+                articles={articles}
                 articleTag={articles.tag ? articles.tag : ''}
                 onFetchPaging={onFetchPaging}
                 onFetchArticleByUser={onFetchArticleByUser}
@@ -27,8 +35,12 @@ export class ContentHome extends Component {
               <ListArticlePreview
                 articles={articles.articles}
                 articlesCount={articles.articlesCount}
+                pageNow={articles.pageNow}
                 onFetchPaging={onFetchPaging}
                 onGetProfile={onGetProfile}
+                onFetchArticleByUser={onFetchArticleByUser}
+                onFetchArticleByTag={onFetchArticleByTag}
+                articleTag={articles.tag ? articles.tag : ''}
               />
             </div>
             <div className="col-md-3">

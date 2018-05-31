@@ -4,7 +4,8 @@ import {
   fetchPagingAction,
   profileAction,
   fetchArticleByTagAction,
-  fetchArticleByUserAction
+  fetchArticleByUserAction,
+  onFetchArticleByUser
 } from '../actions';
 import { ContentHome } from '../components/Home/ContentHome';
 
@@ -25,8 +26,8 @@ const mapDispatchToProps = (dispatch, props) => {
     onGetProfile: (username) => {
       dispatch(profileAction(username));
     },
-    onFetchArticleByTag: (tag) => {
-      dispatch(fetchArticleByTagAction(tag));
+    onFetchArticleByTag: (tag, page) => {
+      dispatch(fetchArticleByTagAction(tag, page));
     },
     onFetchArticleByUser: (token) => {
       dispatch(fetchArticleByUserAction(token));

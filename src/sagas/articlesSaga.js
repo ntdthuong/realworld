@@ -17,7 +17,7 @@ import {
 } from '../actions/actionTypes';
 import { Api } from '../helpers/Api';
 
-export function* fetchArticles(action) {
+function* fetchArticles(action) {
   try {
     const articles = action ? yield Api.getArticlesFromApi(action.page*10) : yield Api.getArticlesFromApi();
     yield put(fetchArticlesSuccessAction(articles));
@@ -30,7 +30,7 @@ export function* watchFetchArticles() {
   yield takeLatest(FETCH_PAGING, fetchArticles)
 }
 
-export function* fetchArticle(action) {
+function* fetchArticle(action) {
   try {
     const articleRecieved = yield Api.getArticleFromApi(action.id);
     yield put(fetchArticleSuccessAction(articleRecieved.article));
@@ -43,7 +43,7 @@ export function* watchFetchArticle() {
   yield takeLatest(FETCH_ARTICLE, fetchArticle)
 }
 
-export function* editorArticle(action) {
+function* editorArticle(action) {
   try {
     const token = yield localStorage.getItem('jwt');
     const { data, id } = action.article;
@@ -59,14 +59,13 @@ export function* watchEditorArticle() {
   yield takeLatest(EDITOR_ARTICLE, editorArticle)
 }
 
-export function* fetchArticlesByUser(action) {
+function* fetchArticlesByUser(action) {
   try {
     const token = localStorage.getItem('jwt');
-    const articleRecieved = yield Api.getArticlesByUser(token);
+    const articleRecieved = yield Api.getArticlesByUser(token, action.page);
     yield put(fetchArticlesByUserSuccessAction(articleRecieved));
   } catch (error) {
-    console.log('error', error.response.data);
-    // yield put(fetchArticlesFailedAction(error.response.data));
+    yield put(fetchArticlesFailedAction(error.response.data));
   }
 }
 
