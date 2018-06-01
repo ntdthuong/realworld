@@ -11,6 +11,7 @@ export class ListArticlePreview extends Component {
           articleInfo={article}
           onGetProfile={onGetProfile}
           onFavoriteAction={onFavoriteAction}
+          index={index}
         />
       );
       if(!articles.length) return <div className="article-preview">No articles are here... yet.</div>

@@ -32,8 +32,8 @@ const mapDispatchToProps = (dispatch, props) => {
     onFetchArticleByUser: (token) => {
       dispatch(fetchFeedByUserAction(token));
     },
-    onFavoriteAction: (favorited, slug) => {
-      dispatch(favoriteAction(favorited, slug));
+    onFavoriteAction: (favorited, slug, index) => {
+      dispatch(favoriteAction(favorited, slug, index));
     }
   }
 };

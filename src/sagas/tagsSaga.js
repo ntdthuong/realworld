@@ -16,7 +16,8 @@ export function* fetchTags() {
 export function* fetchArticlesByTag(action) {
   try {
     const { tag, page } = action.tagInfo;
-    const articles = yield Api.getArticlesByTag(tag, page);
+    const token = localStorage.getItem('jwt');
+    const articles = yield Api.getArticlesByTag(token, tag, page);
     yield put(fetchArticlesByTagSuccessAction(articles, tag));
   } catch (error) {
     yield put(fetchArticlesFailedAction(error));

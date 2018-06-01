@@ -15,9 +15,10 @@ export function articlesReducer(state = {} , action) {
     case FETCH_ARTICLES_BY_TAG_SUCCEEDED:
       const articles = {...action.articles.receivedArticles, tag: action.articles.tag, pageNow: 'tag'};
       return articles;
-    // case FAVORITE_ARTICLE_SUCCEEDED:
-    //   const { receivedArticle } = action;
-    //   return {...state, receivedArticle};
+    case FAVORITE_ARTICLE_SUCCEEDED:
+      const { receivedArticle, index } = action;
+      let newArticle = state.articles[index]=receivedArticle;
+      return {...state, newArticle};
     case FETCH_ARTICLES_FAILED:
       return [];
     default :

@@ -10,12 +10,16 @@ const url_signIn = 'users/login';
 const url_profile = 'profiles/';
 const url_tags = 'tags/';
 
-function* getArticlesFromApi(params) {
+function* getArticlesFromApi(token, params) {
   const sub = params ? `${params}` : '0';
-  const articles = yield axios.get(`${url}${url_articles}${sub}`)
-      .then(res => {
-        return res.data;
-      })
+  const articles = yield axios({
+      method: 'get',
+      url: `${url}${url_articles}${sub}`,
+      headers: token ? {authorization: `Token ${token}`} : ''
+    })
+    .then(res => {
+      return res.data;
+    })
   return articles;
 }
 
@@ -79,12 +83,16 @@ function* getTagsFromApi() {
   return tags;
 }
 
-function* getArticlesByTag(tag, params) {
+function* getArticlesByTag(token, tag, params) {
   const sub = params ? `${params}` : '0';
-  const articles = yield axios.get(`${url}articles?tag=${tag}&limit=10&offset=${sub}`)
-      .then(res => {
-        return res.data;
-      })
+  const articles = yield axios({
+      method: 'get',
+      url: `${url}articles?tag=${tag}&limit=10&offset=${sub}`,
+      headers: token ? {authorization: `Token ${token}`} : ''
+    })
+    .then(res => {
+      return res.data;
+    })
   return articles;
 }
 

@@ -16,16 +16,14 @@ export class ArticlePreview extends Component {
     onGetProfile(username);
   }
 
-  favoriteClick = (favorited, slug) => {
-    // console.log('url', `${slug}/favorite`)
-    // console.log('favorited', favorited)
+  favoriteClick = (favorited, slug, index) => {
     const { onFavoriteAction } = this.props;
-    onFavoriteAction(favorited, slug);
-
+    onFavoriteAction(favorited, slug, index);
+    console.log('index', index)
   }
 
   render() {
-    const { articleInfo } = this.props;
+    const { articleInfo, index } = this.props;
     const { slug, favorited } = articleInfo;
     return (
       <div className="article-preview">
@@ -42,7 +40,7 @@ export class ArticlePreview extends Component {
           </div>
           <button
             className={`btn ${favorited ? 'btn-primary' : 'btn-outline-primary'} btn-sm pull-xs-right`}
-            onClick={() => this.favoriteClick(favorited, slug)}
+            onClick={() => this.favoriteClick(favorited, slug, index)}
           >
             <i className="ion-heart"></i> {articleInfo.favoritesCount}
           </button>

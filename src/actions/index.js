@@ -78,17 +78,19 @@ export const fetchPagingAction = (page) => {
     page
   }
 }
-export const favoriteAction = (favorited, slug) => {
+export const favoriteAction = (favorited, slug, index) => {
   return {
     type: FAVORITE_ARTICLE,
     favorited,
-    slug
+    slug,
+    index
   }
 }
-export const favoriteSuccessAction = (receivedArticle) => {
+export const favoriteSuccessAction = (receivedArticle, index) => {
   return {
     type: FAVORITE_ARTICLE_SUCCEEDED,
-    receivedArticle
+    receivedArticle,
+    index
   }
 }
 export const favoriteFailedAction = (receivedArticle) => {
