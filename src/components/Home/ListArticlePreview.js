@@ -3,13 +3,14 @@ import { ArticlePreview } from './ArticlePreview';
 import { Pagination } from './Pagination';
 export class ListArticlePreview extends Component {
   genList = () => {
-    const { articles, onGetProfile } = this.props;
+    const { articles, onGetProfile, onFavoriteAction } = this.props;
     if(articles) {
       if(articles.length) return articles.map((article, index) =>
         <ArticlePreview
           key={index}
           articleInfo={article}
           onGetProfile={onGetProfile}
+          onFavoriteAction={onFavoriteAction}
         />
       );
       if(!articles.length) return <div className="article-preview">No articles are here... yet.</div>
@@ -23,7 +24,7 @@ export class ListArticlePreview extends Component {
       pageNow,
       onFetchArticleByUser,
       articleTag,
-      onFetchArticleByTag
+      onFetchArticleByTag,
     } = this.props;
 
     return (

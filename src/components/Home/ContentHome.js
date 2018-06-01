@@ -19,7 +19,16 @@ export class ContentHome extends Component {
   }
 
   render() {
-    const { articles, onFetchPaging, onGetProfile, tags, onFetchArticleByTag, onFetchArticleByUser, user } = this.props;
+    const {
+      articles,
+      onFetchPaging,
+      onGetProfile,
+      tags,
+      onFetchArticleByTag,
+      onFetchArticleByUser,
+      user,
+      onFavoriteAction
+    } = this.props;
     return (
       <div className="home-page">
         {this.genBanner()}
@@ -42,6 +51,7 @@ export class ContentHome extends Component {
                 onFetchArticleByUser={onFetchArticleByUser}
                 onFetchArticleByTag={onFetchArticleByTag}
                 articleTag={articles.tag ? articles.tag : ''}
+                onFavoriteAction={onFavoriteAction}
               />
             </div>
             <div className="col-md-3">

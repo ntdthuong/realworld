@@ -1,11 +1,14 @@
 import { put, takeLatest } from 'redux-saga/effects';
+
+import { history } from '../helpers/history';
 import { signUpSuccessAction, userFailedAction } from '../actions';
 import {
-  SIGN_UP
+  SIGN_UP,
+  SIGN_OUT
 } from '../actions/actionTypes';
 import { Api } from '../helpers/Api';
 
-export function* signUpUser(user) {
+function* signUpUser(user) {
   try {
     const userInfo = yield Api.postUserToApi(user.user);
     yield localStorage.setItem('jwt', userInfo.token);
@@ -18,4 +21,18 @@ export function* signUpUser(user) {
 
 export function* watchSignUpUser() {
   yield takeLatest(SIGN_UP, signUpUser)
+}
+
+function* signOutUser() {
+  try {
+    yield localStorage.removeItem('jwt');
+    yield Api.getUserfromApi(localStorage.getItem('jwt'));
+  } catch (error) {
+    yield put(userFailedAction(error.response.data));
+    history.push('/');
+  }
+}
+
+export function* watchSignOutUser() {
+  yield takeLatest(SIGN_OUT, signOutUser)
 }

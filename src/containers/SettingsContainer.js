@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { profileAction, editProfileAction } from '../actions';
+import { profileAction, editProfileAction, signOutAction } from '../actions';
 import { Settings } from '../components/Settings/Settings';
 
 const mapStateToProps = (state) => {
@@ -27,6 +27,9 @@ const mapDispatchToProps = (dispatch, props) => {
         }
         return  <ul className="error-messages">{arrError}</ul>
       }
+    },
+    onSignOut: () => {
+      dispatch(signOutAction());
     }
   }
 };

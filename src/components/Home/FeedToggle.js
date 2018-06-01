@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { NavTab } from '../Common/NavTab'
 
 export class FeedToggle extends Component {
 
@@ -30,7 +29,7 @@ export class FeedToggle extends Component {
     return (
       <div className="feed-toggle">
         <ul className="nav nav-pills outline-active">
-          {this.genTabs('sugar')}
+          {this.genTabs()}
         </ul>
       </div>
     );

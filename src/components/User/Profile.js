@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import { ToggleTab } from './ToggleTab';
+
 export class Profile extends Component {
   constructor(props) {
     super(props);
@@ -36,7 +38,8 @@ export class Profile extends Component {
           <div className="row">
 
             <div className="col-xs-12 col-md-10 offset-md-1">
-              <div className="articles-toggle">
+              <ToggleTab />
+              {/*<div className="articles-toggle">
                 <ul className="nav nav-pills outline-active">
                   <li className="nav-item">
                     <a className="nav-link active" href="">My Articles</a>
@@ -45,7 +48,7 @@ export class Profile extends Component {
                     <a className="nav-link" href="">Favorited Articles</a>
                   </li>
                 </ul>
-              </div>
+              </div>*/}
               <div>
                 <div className="article-preview">
                   <div className="article-meta">

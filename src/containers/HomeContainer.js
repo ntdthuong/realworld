@@ -4,7 +4,8 @@ import {
   fetchPagingAction,
   profileAction,
   fetchArticleByTagAction,
-  fetchArticleByUserAction
+  fetchArticleByUserAction,
+  favoriteAction
 } from '../actions';
 import { ContentHome } from '../components/Home/ContentHome';
 
@@ -30,6 +31,9 @@ const mapDispatchToProps = (dispatch, props) => {
     },
     onFetchArticleByUser: (token) => {
       dispatch(fetchArticleByUserAction(token));
+    },
+    onFavoriteAction: (favorited, slug) => {
+      dispatch(favoriteAction(favorited, slug));
     }
   }
 };

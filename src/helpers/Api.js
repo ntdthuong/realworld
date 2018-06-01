@@ -138,6 +138,19 @@ function* putArticleToApi(token, article, id) {
   return recievedArticle;
 }
 
+function* favoriteApi(favorited, slug, token) {
+  const method = favorited ? 'delete' : 'post';
+  const userInfo = yield axios({
+      method: method,
+      url: `${url}${url_dfArticles}${slug}/favorite`,
+      headers: {authorization: `Token ${token}`}
+    })
+    .then(res => {
+      return res.data.article;
+    })
+  return userInfo;
+}
+
 export const Api = {
   getArticlesFromApi,
   getArticleFromApi,
@@ -150,5 +163,6 @@ export const Api = {
   postUserToApi,
   matchUserToApi,
   getProfileFromApi,
-  editProfileToApi
+  editProfileToApi,
+  favoriteApi
 }

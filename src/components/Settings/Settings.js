@@ -82,6 +82,10 @@ export class Settings extends Component {
     const { onGenErrors, profile } = this.props;
     return onGenErrors(profile.errors);
   }
+  handleClick = () => {
+    const { onSignOut } = this.props;
+    onSignOut();
+  }
 
   render() {
     return (
@@ -102,6 +106,11 @@ export class Settings extends Component {
                     </button>
                 </fieldset>
               </form>
+              <hr/>
+              <button
+                className="btn btn-outline-danger"
+                onClick={this.handleClick}
+              >Or click here to logout.</button>
             </div>
           </div>
         </div>

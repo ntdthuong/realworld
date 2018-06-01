@@ -8,6 +8,10 @@ import {
   FETCH_ARTICLE_SUCCEEDED,
   FETCH_ARTICLE_FAILED,
 
+  FAVORITE_ARTICLE,
+  FAVORITE_ARTICLE_SUCCEEDED,
+  FAVORITE_ARTICLE_FAILED,
+
   EDITOR_ARTICLE,
   EDITOR_ARTICLE_SUCCEEDED,
   EDITOR_ARTICLE_FAILED,
@@ -19,6 +23,7 @@ import {
   SIGN_UP_SUCCESS,
   SIGN_IN,
   SIGN_IN_SUCCESS,
+  SIGN_OUT,
   FETCH_USER_FAILED,
 
   FETCH_PROFILE,
@@ -71,6 +76,25 @@ export const fetchPagingAction = (page) => {
   return {
     type: FETCH_PAGING,
     page
+  }
+}
+export const favoriteAction = (favorited, slug) => {
+  return {
+    type: FAVORITE_ARTICLE,
+    favorited,
+    slug
+  }
+}
+export const favoriteSuccessAction = (receivedArticle) => {
+  return {
+    type: FAVORITE_ARTICLE_SUCCEEDED,
+    receivedArticle
+  }
+}
+export const favoriteFailedAction = (receivedArticle) => {
+  return {
+    type: FAVORITE_ARTICLE_FAILED,
+    receivedArticle
   }
 }
 // export const fetchSuccessAction = (receivedArticles) => {
@@ -127,6 +151,11 @@ export const signInSuccessAction = (receivedUser) => {
   return {
     type: SIGN_IN_SUCCESS,
     receivedUser
+  }
+}
+export const signOutAction = () => {
+  return {
+    type: SIGN_OUT
   }
 }
 export const userFailedAction = (error) => {

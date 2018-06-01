@@ -7,13 +7,16 @@ import {
   fetchArticleFailedAction,
   editorArticleSuccessAction,
   editorArticleFailedAction,
-  fetchArticlesByUserSuccessAction
+  fetchArticlesByUserSuccessAction,
+  favoriteSuccessAction,
+  favoriteFailedAction
 } from '../actions';
 import {
   FETCH_PAGING,
   EDITOR_ARTICLE,
   FETCH_ARTICLE,
-  FETCH_ARTICLES_BY_USER
+  FETCH_ARTICLES_BY_USER,
+  FAVORITE_ARTICLE
 } from '../actions/actionTypes';
 import { Api } from '../helpers/Api';
 
@@ -71,4 +74,19 @@ function* fetchArticlesByUser(action) {
 
 export function* watchFetchArticlesByUser() {
   yield takeLatest(FETCH_ARTICLES_BY_USER, fetchArticlesByUser)
+}
+function* favoriteArticle(action) {
+  try {
+    const token = localStorage.getItem('jwt');
+    const article = yield Api.favoriteApi(action.favorited, action.slug, token);
+    console.log('article', article)
+    yield put(favoriteSuccessAction(article));
+  } catch (error) {
+    console.log('error', error.response.data)
+    // yield put(favoriteFailedAction(error.response.data));
+  }
+}
+
+export function* watchFavoriteArticle() {
+  yield takeLatest(FAVORITE_ARTICLE, favoriteArticle)
 }

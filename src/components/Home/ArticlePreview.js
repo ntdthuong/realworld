@@ -16,8 +16,17 @@ export class ArticlePreview extends Component {
     onGetProfile(username);
   }
 
+  favoriteClick = (favorited, slug) => {
+    // console.log('url', `${slug}/favorite`)
+    // console.log('favorited', favorited)
+    const { onFavoriteAction } = this.props;
+    onFavoriteAction(favorited, slug);
+
+  }
+
   render() {
     const { articleInfo } = this.props;
+    const { slug, favorited } = articleInfo;
     return (
       <div className="article-preview">
         <div className="article-meta"
@@ -31,7 +40,10 @@ export class ArticlePreview extends Component {
             <a href={`/${articleInfo.author.username}`} className="author">{articleInfo.author.username}</a>
             <span className="date">{this.formatDate(articleInfo.createdAt)}</span>
           </div>
-          <button className="btn btn-outline-primary btn-sm pull-xs-right">
+          <button
+            className={`btn ${favorited ? 'btn-primary' : 'btn-outline-primary'} btn-sm pull-xs-right`}
+            onClick={() => this.favoriteClick(favorited, slug)}
+          >
             <i className="ion-heart"></i> {articleInfo.favoritesCount}
           </button>
         </div>
