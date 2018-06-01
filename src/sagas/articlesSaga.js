@@ -3,11 +3,12 @@ import {
   fetchPagingAction,
   fetchArticlesSuccessAction,
   fetchArticlesFailedAction,
+  fetchFeedFailedAction,
   fetchArticleSuccessAction,
   fetchArticleFailedAction,
   editorArticleSuccessAction,
   editorArticleFailedAction,
-  fetchArticlesByUserSuccessAction,
+  fetchFeedByUserSuccessAction,
   favoriteSuccessAction,
   favoriteFailedAction
 } from '../actions';
@@ -15,7 +16,7 @@ import {
   FETCH_PAGING,
   EDITOR_ARTICLE,
   FETCH_ARTICLE,
-  FETCH_ARTICLES_BY_USER,
+  FETCH_FEED_BY_USER,
   FAVORITE_ARTICLE
 } from '../actions/actionTypes';
 import { Api } from '../helpers/Api';
@@ -62,18 +63,18 @@ export function* watchEditorArticle() {
   yield takeLatest(EDITOR_ARTICLE, editorArticle)
 }
 
-function* fetchArticlesByUser(action) {
+function* fetchFeedByUser(action) {
   try {
     const token = localStorage.getItem('jwt');
-    const articleRecieved = yield Api.getArticlesByUser(token, action.page);
-    yield put(fetchArticlesByUserSuccessAction(articleRecieved));
+    const articleRecieved = yield Api.getFeedByUser(token, action.page);
+    yield put(fetchFeedByUserSuccessAction(articleRecieved));
   } catch (error) {
     yield put(fetchArticlesFailedAction(error.response.data));
   }
 }
 
-export function* watchFetchArticlesByUser() {
-  yield takeLatest(FETCH_ARTICLES_BY_USER, fetchArticlesByUser)
+export function* watchFetchFeedByUser() {
+  yield takeLatest(FETCH_FEED_BY_USER, fetchFeedByUser)
 }
 function* favoriteArticle(action) {
   try {

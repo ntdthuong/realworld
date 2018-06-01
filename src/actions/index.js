@@ -36,8 +36,8 @@ import {
 
   FETCH_ARTICLES_BY_TAG,
   FETCH_ARTICLES_BY_TAG_SUCCEEDED,
-  FETCH_ARTICLES_BY_USER,
-  FETCH_ARTICLES_BY_USER_SUCCEEDED,
+  FETCH_FEED_BY_USER,
+  FETCH_FEED_BY_USER_SUCCEEDED,
   FETCH_TAGS_SUCCEEDED,
   FETCH_TAGS_FAILED,
 } from './actionTypes';
@@ -215,15 +215,15 @@ export const fetchArticlesByTagSuccessAction = (receivedArticles, tag) => {
     articles: {receivedArticles, tag}
   }
 }
-export const fetchArticleByUserAction = (page) => {
+export const fetchFeedByUserAction = (page) => {
   return {
-    type: FETCH_ARTICLES_BY_USER,
+    type: FETCH_FEED_BY_USER,
     page
   }
 }
-export const fetchArticlesByUserSuccessAction = (receivedArticles, tag) => {
+export const fetchFeedByUserSuccessAction = (receivedArticles, tag) => {
   return {
-    type: FETCH_ARTICLES_BY_USER_SUCCEEDED,
+    type: FETCH_FEED_BY_USER_SUCCEEDED,
     receivedArticles
   }
 }

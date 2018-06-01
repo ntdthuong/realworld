@@ -88,7 +88,7 @@ function* getArticlesByTag(tag, params) {
   return articles;
 }
 
-function* getArticlesByUser(token, params) {
+function* getFeedByUser(token, params) {
   const sub = params ? `${params}` : '0';
   const articles = yield axios({
     method: 'get',
@@ -99,6 +99,16 @@ function* getArticlesByUser(token, params) {
     history.push('/');
     return res.data;
   })
+  return articles;
+}
+
+function* getArticlesByUser(username, params) {
+  const sub = params ? `${params}` : '0';
+  const articles = yield axios.get(`${url}articles?author=${username}&limit=5&offset=${sub}}`)
+      .then(res => {
+        console.log('call', res.data)
+        return res.data;
+      })
   return articles;
 }
 
@@ -158,11 +168,12 @@ export const Api = {
   putArticleToApi,
   getTagsFromApi,
   getArticlesByTag,
-  getArticlesByUser,
+  getFeedByUser,
   getUserfromApi,
   postUserToApi,
   matchUserToApi,
   getProfileFromApi,
   editProfileToApi,
-  favoriteApi
+  favoriteApi,
+  getArticlesByUser
 }

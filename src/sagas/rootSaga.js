@@ -3,7 +3,7 @@ import {
   watchFetchArticles,
   watchFetchArticle,
   watchEditorArticle,
-  watchFetchArticlesByUser,
+  watchFetchFeedByUser,
   watchFavoriteArticle
 } from './articlesSaga';
 import { fetchTags, watchFetchArticlesByTag } from './tagsSaga';
@@ -24,7 +24,7 @@ export default function* rootSaga() {
     call(watchFetchArticle),
     call(watchEditorArticle),
     call(watchFetchArticlesByTag),
-    call(watchFetchArticlesByUser),
+    call(watchFetchFeedByUser),
     call(watchSignOutUser),
     call(watchFavoriteArticle)
   ])

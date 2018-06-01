@@ -7,6 +7,7 @@ export class Profile extends Component {
   constructor(props) {
     super(props);
     this.props.onGetProfile(this.props.info.match.params.id);
+    console.log('id', this.props.info.match.params.id)
   }
   render() {
     const { profile } = this.props;
@@ -36,19 +37,8 @@ export class Profile extends Component {
 
         <div className="container">
           <div className="row">
-
             <div className="col-xs-12 col-md-10 offset-md-1">
               <ToggleTab />
-              {/*<div className="articles-toggle">
-                <ul className="nav nav-pills outline-active">
-                  <li className="nav-item">
-                    <a className="nav-link active" href="">My Articles</a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="">Favorited Articles</a>
-                  </li>
-                </ul>
-              </div>*/}
               <div>
                 <div className="article-preview">
                   <div className="article-meta">
@@ -90,9 +80,7 @@ export class Profile extends Component {
                   </a>
                 </div>
               </div>
-
             </div>
-
           </div>
         </div>
 
