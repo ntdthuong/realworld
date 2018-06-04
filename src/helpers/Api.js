@@ -3,7 +3,7 @@ import { history } from '../helpers/history';
 
 const url = 'https://conduit.productionready.io/api/';
 const url_dfArticles = 'articles/';
-const url_articles = 'articles/?limit=10&offset=';
+const url_articles = 'articles/?limit=2&offset=';
 const url_user = 'user/';
 const url_signUp = 'users/';
 const url_signIn = 'users/login';
@@ -87,7 +87,7 @@ function* getArticlesByTag(token, tag, params) {
   const sub = params ? `${params}` : '0';
   const articles = yield axios({
       method: 'get',
-      url: `${url}articles?tag=${tag}&limit=10&offset=${sub}`,
+      url: `${url}articles?tag=${tag}&limit=2&offset=${sub}`,
       headers: token ? {authorization: `Token ${token}`} : ''
     })
     .then(res => {
@@ -100,7 +100,7 @@ function* getFeedByUser(token, params) {
   const sub = params ? `${params}` : '0';
   const articles = yield axios({
     method: 'get',
-    url: `${url}${url_dfArticles}feed?limit=10&offset=${sub}`,
+    url: `${url}${url_dfArticles}feed?limit=2&offset=${sub}`,
     headers: {authorization: `Token ${token}`}
   })
   .then(res => {

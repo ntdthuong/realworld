@@ -19,6 +19,7 @@ export class ContentHome extends Component {
   }
 
   render() {
+    console.log('content home', this.props);
     const {
       articles,
       onFetchPaging,
@@ -29,6 +30,8 @@ export class ContentHome extends Component {
       user,
       onFavoriteAction
     } = this.props;
+    const loading = articles.loading;
+    console.log('loading1231321', loading);
     return (
       <div className="home-page">
         {this.genBanner()}
@@ -38,6 +41,7 @@ export class ContentHome extends Component {
               <FeedToggle
                 user={user}
                 articles={articles}
+                loading= {loading}
                 articleTag={articles.tag ? articles.tag : ''}
                 onFetchPaging={onFetchPaging}
                 onFetchFeedByUser={onFetchFeedByUser}
@@ -46,6 +50,7 @@ export class ContentHome extends Component {
                 articles={articles.articles}
                 articlesCount={articles.articlesCount}
                 pageNow={articles.pageNow}
+                loading= {loading}
                 onFetchPaging={onFetchPaging}
                 onGetProfile={onGetProfile}
                 onFetchFeedByUser={onFetchFeedByUser}

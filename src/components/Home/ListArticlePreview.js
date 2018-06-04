@@ -4,15 +4,19 @@ import { Pagination } from '../Common/Pagination';
 export class ListArticlePreview extends Component {
   constructor(props) {
     super(props);
+    console.log('ListArticlePreview', this.props);
     this.state = {
       loading: true
     };
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
+    console.log('nextProps', nextProps);
+    console.log('prevState', prevState);
     if (nextProps && nextProps.articles) {
       return {
-        loading: false
+        loading:  false,
+        pageNow: nextProps.pageNow
       };
     }
     return null;
@@ -20,8 +24,8 @@ export class ListArticlePreview extends Component {
 
   genList = () => {
     const { articles, onGetProfile, onFavoriteAction } = this.props;
-    if(articles) {
-      if(articles.length) return articles.map((article, index) =>
+    if (articles) {
+      if (articles.length) return articles.map((article, index) =>
         <ArticlePreview
           key={index}
           articleInfo={article}
@@ -30,7 +34,7 @@ export class ListArticlePreview extends Component {
           index={index}
         />
       );
-      if(!articles.length) return <div className="article-preview">No articles are here... yet.</div>
+      if (!articles.length) return <div className="article-preview">No articles are here... yet.</div>
     }
   }
 
@@ -43,11 +47,12 @@ export class ListArticlePreview extends Component {
       articleTag,
       onFetchArticleByTag,
     } = this.props;
+    console.log('genContent', this.state);
     const { loading } = this.state;
     let content;
     content = loading
-    ? <div className="article-preview">Articles are been loading...</div>
-    : <div>
+      ? <div className="article-preview">Articles are been loading...</div>
+      : <div>
         {this.genList()}
         <Pagination
           articlesCount={articlesCount}
@@ -64,7 +69,7 @@ export class ListArticlePreview extends Component {
   render() {
     return (
       <div>
-        { this.genContent() }
+        {this.genContent()}
       </div>
     );
   }
