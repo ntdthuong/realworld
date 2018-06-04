@@ -19,7 +19,6 @@ export class ArticlePreview extends Component {
   favoriteClick = (favorited, slug, index) => {
     const { onFavoriteAction } = this.props;
     onFavoriteAction(favorited, slug, index);
-    console.log('index', index)
   }
 
   render() {

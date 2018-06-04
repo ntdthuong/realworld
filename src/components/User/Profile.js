@@ -2,15 +2,34 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import { ToggleTab } from './ToggleTab';
+import { ArticlePreview } from '../Home/ArticlePreview';
+import { Pagination } from '../Common/Pagination';
 
 export class Profile extends Component {
   constructor(props) {
     super(props);
-    this.props.onGetProfile(this.props.info.match.params.id);
-    console.log('id', this.props.info.match.params.id)
+    const { onGetMyArticles, onGetProfile } = this.props;
+    const username = this.props.info.match.params.id;
+    onGetProfile(username);
+    onGetMyArticles(username)
   }
+
+  genList = () => {
+    const { articles} = this.props.articles;
+    if(articles) {
+      if(articles.length) return articles.map((article, index) =>
+        <ArticlePreview
+          key={index}
+          articleInfo={article}
+          index={index}
+        />
+      );
+      if(!articles.length) return <div className="article-preview">No articles are here... yet.</div>
+    }
+  }
+
   render() {
-    const { profile } = this.props;
+    const { profile, articles } = this.props;
     return (
       <div className="profile-page">
         <div className="user-info">
@@ -38,47 +57,13 @@ export class Profile extends Component {
         <div className="container">
           <div className="row">
             <div className="col-xs-12 col-md-10 offset-md-1">
-              <ToggleTab />
+              <ToggleTab pageNow={articles.pageNow}/>
               <div>
-                <div className="article-preview">
-                  <div className="article-meta">
-                    <a href=""><img src="http://i.imgur.com/Qr71crq.jpg" alt="img article"/></a>
-                    <div className="info">
-                      <a href="" className="author">Eric Simons</a>
-                      <span className="date">January 20th</span>
-                    </div>
-                    <button className="btn btn-outline-primary btn-sm pull-xs-right">
-                      <i className="ion-heart"></i> 29
-                    </button>
-                  </div>
-                  <a href="" className="preview-link">
-                    <h1>How to build webapps that scale</h1>
-                    <p>This is the description for the post.</p>
-                    <span>Read more...</span>
-                  </a>
-                </div>
-
-                <div className="article-preview">
-                  <div className="article-meta">
-                    <a href=""><img src="http://i.imgur.com/N4VcUeJ.jpg" alt="img article"/></a>
-                    <div className="info">
-                      <a href="" className="author">Albert Pai</a>
-                      <span className="date">January 20th</span>
-                    </div>
-                    <button className="btn btn-outline-primary btn-sm pull-xs-right">
-                      <i className="ion-heart"></i> 32
-                    </button>
-                  </div>
-                  <a href="" className="preview-link">
-                    <h1>The song you won't ever stop singing. No matter how hard you try.</h1>
-                    <p>This is the description for the post.</p>
-                    <span>Read more...</span>
-                    <ul className="tag-list">
-                      <li className="tag-default tag-pill tag-outline">Music</li>
-                      <li className="tag-default tag-pill tag-outline">Song</li>
-                    </ul>
-                  </a>
-                </div>
+                {this.genList()}
+                <Pagination
+                  articlesCount={articles.articlesCount}
+                  pageNow={articles.pageNow}
+                />
               </div>
             </div>
           </div>

@@ -29,7 +29,7 @@ const mapDispatchToProps = (dispatch, props) => {
     onFetchArticleByTag: (tag, page) => {
       dispatch(fetchArticleByTagAction(tag, page));
     },
-    onFetchArticleByUser: (token) => {
+    onFetchFeedByUser: (token) => {
       dispatch(fetchFeedByUserAction(token));
     },
     onFavoriteAction: (favorited, slug, index) => {

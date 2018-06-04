@@ -21,6 +21,7 @@ export class ArticleDetails extends Component {
   render() {
     const { id } = this.props.info.match.params;
     const { article } = this.props;
+    const body = article.body ? article.body.split('\n'): '';
     const { username, image } = article.author ? article.author : '';
     return (
       <div className="article-page">
@@ -49,7 +50,7 @@ export class ArticleDetails extends Component {
           <div className="row article-content">
             <div className="col-md-12">
               <div>
-                <p>{article.body}</p>
+                {body ? body.map((p, index) => <p key={index}>{p}</p>) : ''}
               </div>
               <ul className="tag-list">
                 {this.genTag(article.tagList)}

@@ -38,6 +38,11 @@ import {
   FETCH_ARTICLES_BY_TAG_SUCCEEDED,
   FETCH_FEED_BY_USER,
   FETCH_FEED_BY_USER_SUCCEEDED,
+
+  FETCH_ARTICLES_BY_USER,
+  FETCH_ARTICLES_BY_USER_SUCCEEDED,
+  FETCH_ARTICLES_BY_USER_FAILED,
+
   FETCH_TAGS_SUCCEEDED,
   FETCH_TAGS_FAILED,
 } from './actionTypes';
@@ -229,6 +234,27 @@ export const fetchFeedByUserSuccessAction = (receivedArticles, tag) => {
     receivedArticles
   }
 }
+
+export const fetchArticlesByUserAction = (username, page) => {
+  return {
+    type: FETCH_ARTICLES_BY_USER,
+    username,
+    page
+  }
+}
+export const myArticlesSuccessAction = (receivedArticles) => {
+  return {
+    type: FETCH_ARTICLES_BY_USER_SUCCEEDED,
+    receivedArticles
+  }
+}
+export const myArticlesFailedAction = (error) => {
+  return {
+    type: FETCH_ARTICLES_BY_USER_FAILED,
+    error
+  }
+}
+
 export const tagsSuccessAction = (receivedTags) => {
   return {
     type: FETCH_TAGS_SUCCEEDED,

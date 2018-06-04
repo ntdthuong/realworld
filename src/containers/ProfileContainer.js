@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { profileAction } from '../actions';
+import { profileAction, fetchArticlesByUserAction } from '../actions';
 import { Profile } from '../components/User/Profile';
 
 const mapStateToProps = (state) => {
@@ -14,6 +14,9 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     onGetProfile: (username) => {
       dispatch(profileAction(username));
+    },
+    onGetMyArticles : (page) => {
+      dispatch(fetchArticlesByUserAction(page));
     }
   }
 };

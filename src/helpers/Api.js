@@ -114,7 +114,6 @@ function* getArticlesByUser(username, params) {
   const sub = params ? `${params}` : '0';
   const articles = yield axios.get(`${url}articles?author=${username}&limit=5&offset=${sub}}`)
       .then(res => {
-        console.log('call', res.data)
         return res.data;
       })
   return articles;

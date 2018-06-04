@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Banner } from './Banner';
-import { FeedToggle } from './FeedToggle';
+import { FeedToggle } from '../Common/FeedToggle';
 import { ListArticlePreview } from './ListArticlePreview';
 import { Tags } from './Tags';
 
@@ -9,8 +9,8 @@ export class ContentHome extends Component {
   constructor(props) {
     super(props);
     const token = localStorage.getItem('jwt');
-    const { onFetchArticleByUser, onFetchPaging } = this.props;
-    token ? onFetchArticleByUser(`Token ${token}`) : onFetchPaging();
+    const { onFetchFeedByUser, onFetchPaging } = this.props;
+    token ? onFetchFeedByUser() : onFetchPaging();
   }
 
   genBanner = () => {
@@ -25,7 +25,7 @@ export class ContentHome extends Component {
       onGetProfile,
       tags,
       onFetchArticleByTag,
-      onFetchArticleByUser,
+      onFetchFeedByUser,
       user,
       onFavoriteAction
     } = this.props;
@@ -40,7 +40,7 @@ export class ContentHome extends Component {
                 articles={articles}
                 articleTag={articles.tag ? articles.tag : ''}
                 onFetchPaging={onFetchPaging}
-                onFetchArticleByUser={onFetchArticleByUser}
+                onFetchFeedByUser={onFetchFeedByUser}
               />
               <ListArticlePreview
                 articles={articles.articles}
@@ -48,7 +48,7 @@ export class ContentHome extends Component {
                 pageNow={articles.pageNow}
                 onFetchPaging={onFetchPaging}
                 onGetProfile={onGetProfile}
-                onFetchArticleByUser={onFetchArticleByUser}
+                onFetchFeedByUser={onFetchFeedByUser}
                 onFetchArticleByTag={onFetchArticleByTag}
                 articleTag={articles.tag ? articles.tag : ''}
                 onFavoriteAction={onFavoriteAction}

@@ -1,6 +1,13 @@
 import { put, takeLatest } from 'redux-saga/effects';
 
-import { profileSuccessAction, profileFailedAction, editProfileSuccessAction, editProfileFailedAction } from '../actions';
+import {
+  profileSuccessAction,
+  profileFailedAction,
+  editProfileSuccessAction,
+  editProfileFailedAction,
+  myArticlesSuccessAction,
+  fetchArticlesFailedAction
+} from '../actions';
 import {
   FETCH_PROFILE,
   EDIT_PROFILE,
@@ -37,11 +44,10 @@ export function* watchEditProfile() {
 
 function* fetchArticlesByUser(action) {
   try {
-    console.log('fetching')
-    // const articles = action ? yield Api.getArticlesFromApi(action.page) : yield Api.getArticlesFromApi();
-    // yield put(fetchArticlesSuccessAction(articles));
+    const articles = yield Api.getArticlesByUser(action.username);
+    yield put(myArticlesSuccessAction(articles));
   } catch (error) {
-    // yield put(fetchArticlesFailedAction(error));
+    yield put(fetchArticlesFailedAction(error.response.data));
   }
 }
 

@@ -3,14 +3,14 @@ import {
   fetchPagingAction,
   fetchArticlesSuccessAction,
   fetchArticlesFailedAction,
-  fetchFeedFailedAction,
+  // fetchFeedFailedAction,
   fetchArticleSuccessAction,
   fetchArticleFailedAction,
   editorArticleSuccessAction,
   editorArticleFailedAction,
   fetchFeedByUserSuccessAction,
   favoriteSuccessAction,
-  favoriteFailedAction
+  // favoriteFailedAction
 } from '../actions';
 import {
   FETCH_PAGING,
