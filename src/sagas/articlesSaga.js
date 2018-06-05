@@ -24,7 +24,7 @@ import { Api } from '../helpers/Api';
 function* fetchArticles(action) {
   try {
     const token = localStorage.getItem('jwt');
-    const articles = action ? yield Api.getArticlesFromApi(token, action.page) : yield Api.getArticlesFromApi(token);
+    const articles = token ? yield Api.getArticlesFromApi(token, action.page) : yield Api.getArticlesFromApi(undefined, action.page);
     yield put(fetchArticlesSuccessAction(articles));
   } catch (error) {
     yield put(fetchArticlesFailedAction(error));

@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { Input } from '../Common/Input';
 import { Textarea } from '../Common/Textarea';
 
 export class Settings extends Component {
+  static defaultProps = {
+    password: ''
+  }
 
   constructor(props) {
     super(props);
@@ -118,3 +122,7 @@ export class Settings extends Component {
     );
   }
 }
+
+// Settings.propTypes = {
+//   password: PropTypes.number
+// };

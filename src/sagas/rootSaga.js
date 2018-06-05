@@ -10,6 +10,7 @@ import { fetchTags, watchFetchArticlesByTag } from './tagsSaga';
 import { watchSignUpUser, watchSignOutUser } from './signUpSaga';
 import { watchSignInUser, getUser, watchGetUser } from './signInSaga';
 import { watchFetchProfile, watchEditProfile, watchFetchArticlesByUser } from './profileSaga';
+import { watchGetComments, watchPostComment } from './commentsSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -27,6 +28,8 @@ export default function* rootSaga() {
     call(watchFetchFeedByUser),
     call(watchSignOutUser),
     call(watchFavoriteArticle),
-    call(watchFetchArticlesByUser)
+    call(watchFetchArticlesByUser),
+    call(watchGetComments),
+    call(watchPostComment)
   ])
 }

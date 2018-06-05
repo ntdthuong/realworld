@@ -43,10 +43,19 @@ import {
   FETCH_ARTICLES_BY_USER_SUCCEEDED,
   FETCH_ARTICLES_BY_USER_FAILED,
 
+  FETCH_COMMENTS,
+  FETCH_COMMENTS_SUCCEEDED,
+  FETCH_COMMENTS_FAILED,
+
+  POST_COMMENT,
+  POST_COMMENT_SUCCEEDED,
+  POST_COMMENT_FAILED,
+
   FETCH_TAGS_SUCCEEDED,
   FETCH_TAGS_FAILED,
 } from './actionTypes';
 
+// ARTICLES
 export const fetchArticleAction = (id) => {
   return {
     type: FETCH_ARTICLE,
@@ -83,6 +92,8 @@ export const fetchPagingAction = (page) => {
     page
   }
 }
+
+// FAVORITE
 export const favoriteAction = (favorited, slug, index) => {
   return {
     type: FAVORITE_ARTICLE,
@@ -136,6 +147,7 @@ export const editorArticleFailedAction = (error) => {
   }
 }
 
+// USER
 export const signUpAction = (user) => {
   return {
     type: SIGN_UP,
@@ -172,6 +184,7 @@ export const userFailedAction = (error) => {
   }
 }
 
+// PROFILE
 export const profileAction = (username) => {
   return {
     type: FETCH_PROFILE,
@@ -210,6 +223,7 @@ export const editProfileFailedAction = (error) => {
   }
 }
 
+// ARTICLES
 export const fetchArticleByTagAction = (tag, page) => {
   return {
     type: FETCH_ARTICLES_BY_TAG,
@@ -255,6 +269,7 @@ export const myArticlesFailedAction = (error) => {
   }
 }
 
+// TAGS
 export const tagsSuccessAction = (receivedTags) => {
   return {
     type: FETCH_TAGS_SUCCEEDED,
@@ -264,6 +279,45 @@ export const tagsSuccessAction = (receivedTags) => {
 export const tagsFailedAction = (error) => {
   return {
     type: FETCH_TAGS_FAILED,
+    error
+  }
+}
+
+// COMMENTS
+export const fetchCommentsAction = (id) => {
+  return {
+    type: FETCH_COMMENTS,
+    id
+  }
+}
+export const fetchCommentsSuccessAction = (receivedCmts) => {
+  return {
+    type: FETCH_COMMENTS_SUCCEEDED,
+    receivedCmts
+  }
+}
+export const fetchCommentsFailedAction = (error) => {
+  return {
+    type: FETCH_COMMENTS_FAILED,
+    error
+  }
+}
+export const postCommentAction = (id, comment) => {
+  return {
+    type: POST_COMMENT,
+    id,
+    comment
+  }
+}
+export const postCommentSuccessAction = (receivedCmt) => {
+  return {
+    type: POST_COMMENT_SUCCEEDED,
+    receivedCmt
+  }
+}
+export const postCommentFailedAction = (error) => {
+  return {
+    type: POST_COMMENT_FAILED,
     error
   }
 }
