@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 
+import { Comment } from '../Common/Comment';
+
 export class ArticleDetails extends Component {
   constructor(props) {
     super(props);
-    this.props.onGetArticle(this.props.info.match.params.id);
+    const { id } = this.props.info.match.params;
+    const { onGetArticle, onGetComments } = this.props;
+    onGetArticle(id);
+    onGetComments(id);
   }
 
   genTag = (tags) => {
@@ -20,7 +25,7 @@ export class ArticleDetails extends Component {
 
   render() {
     const { id } = this.props.info.match.params;
-    const { article } = this.props;
+    const { article, comments, user, onPostComment } = this.props;
     const body = article.body ? article.body.split('\n'): '';
     const { username, image } = article.author ? article.author : '';
     return (
@@ -31,7 +36,7 @@ export class ArticleDetails extends Component {
             <div className="article-meta">
               <a href=""><img src={image} alt="img"/></a>
               <div className="info">
-                <a href="" className="author">{username}</a>
+                <a href={`/${username}`} className="author">{username}</a>
                 <span className="date">{this.formatDate(article.createdAt)}</span>
               </div>
               <a className="btn btn-outline-secondary btn-sm" href={`/editor/${id}`}><i className="ion-edit"></i>&nbsp;&nbsp;Edit Article</a>
@@ -58,57 +63,8 @@ export class ArticleDetails extends Component {
             </div>
           </div>
           <hr />
-          <div className="row">
-            <div className="col-xs-12 col-md-8 offset-md-2">
-              <form className="card comment-form">
-                <div className="card-block">
-                  <textarea className="form-control" placeholder="Write a comment..." rows="3"></textarea>
-                </div>
-                <div className="card-footer">
-                  <img src="http://i.imgur.com/Qr71crq.jpg" className="comment-author-img" alt="img user"/>
-                  <button className="btn btn-sm btn-primary">
-                  Post Comment
-                  </button>
-                </div>
-              </form>
-              <div className="card">
-                <div className="card-block">
-                  <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-                <div className="card-footer">
-                  <a href="" className="comment-author">
-                    <img src="http://i.imgur.com/Qr71crq.jpg" className="comment-author-img" alt="img user"/>
-                  </a>
-                  &nbsp;
-                  <a href="" className="comment-author">Jacob Schmidt</a>
-                  <span className="date-posted">Dec 29th</span>
-                </div>
-              </div>
-
-              <div className="card">
-                <div className="card-block">
-                  <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-                <div className="card-footer">
-                  <a href="" className="comment-author">
-                    <img src="http://i.imgur.com/Qr71crq.jpg" className="comment-author-img" alt="img user"/>
-                  </a>
-                  &nbsp;
-                  <a href="" className="comment-author">Jacob Schmidt</a>
-                  <span className="date-posted">Dec 29th</span>
-                  <span className="mod-options">
-                    {/*<i className="ion-edit"></i>*/}
-                    <i className="ion-trash-a"></i>
-                  </span>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
+          <Comment comments={comments} user={user} id={id} onPostComment={onPostComment}/>
         </div>
-
       </div>
     );
   }

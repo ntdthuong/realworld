@@ -1,4 +1,6 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+
 import { HomeContainer } from '../containers/HomeContainer';
 import { SignUpContainer } from '../containers/SignUpContainer';
 import { SignInContainer } from '../containers/SignInContainer';
@@ -50,3 +52,8 @@ const routes = [
   }
 ];
 export default routes;
+
+// const LoadableOtherComponent = Loadable({
+//   loader: () => routes,
+//   loading: () => <div>Loading...</div>,
+// });

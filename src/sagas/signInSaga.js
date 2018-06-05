@@ -19,7 +19,7 @@ export function* watchGetUser() {
   yield takeLatest(EDIT_PROFILE_SUCCESS, getUser);
 }
 
-export function* signInUser(user) {
+function* signInUser(user) {
   try {
     const userInfo = yield Api.matchUserToApi(user.user);
     yield localStorage.setItem('jwt', userInfo.token);
