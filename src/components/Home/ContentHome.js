@@ -19,7 +19,6 @@ export class ContentHome extends Component {
   }
 
   render() {
-    console.log('content home', this.props);
     const {
       articles,
       onFetchPaging,
@@ -31,7 +30,6 @@ export class ContentHome extends Component {
       onFavoriteAction
     } = this.props;
     const loading = articles.loading;
-    console.log('loading1231321', loading);
     return (
       <div className="home-page">
         {this.genBanner()}
@@ -45,6 +43,7 @@ export class ContentHome extends Component {
                 articleTag={articles.tag ? articles.tag : ''}
                 onFetchPaging={onFetchPaging}
                 onFetchFeedByUser={onFetchFeedByUser}
+                page={1}
               />
               <ListArticlePreview
                 articles={articles.articles}
@@ -57,6 +56,7 @@ export class ContentHome extends Component {
                 onFetchArticleByTag={onFetchArticleByTag}
                 articleTag={articles.tag ? articles.tag : ''}
                 onFavoriteAction={onFavoriteAction}
+                page={1}
               />
             </div>
             <div className="col-md-3">
