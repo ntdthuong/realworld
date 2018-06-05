@@ -4,20 +4,25 @@ import { Pagination } from '../Common/Pagination';
 export class ListArticlePreview extends Component {
   constructor(props) {
     super(props);
-    console.log('ListArticlePreview', this.props);
     this.state = {
+      page: props.page,
+      currentPage: props.page,
       loading: true
     };
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log('nextProps', nextProps);
-    console.log('prevState', prevState);
-    if (nextProps && nextProps.articles) {
+    if (nextProps && nextProps.articles && (nextProps.page === prevState.currentPage)) {
       return {
-        loading:  false,
+        loading: false,
         pageNow: nextProps.pageNow
-      };
+      }
+    } else if ((nextProps.page !== prevState.currentPage) && !prevState.loading) {
+      return {
+        loading: true,
+        currentPage: 1,
+        pageNow: nextProps.pageNow
+      }
     }
     return null;
   }
@@ -38,6 +43,13 @@ export class ListArticlePreview extends Component {
     }
   }
 
+  handleChangeState = (page) => {
+    this.setState({
+      page: page,
+      currentPage: page
+    })
+  }
+
   genContent = () => {
     const {
       articlesCount,
@@ -47,20 +59,21 @@ export class ListArticlePreview extends Component {
       articleTag,
       onFetchArticleByTag,
     } = this.props;
-    console.log('genContent', this.state);
-    const { loading } = this.state;
+    const { loading, page } = this.state;
     let content;
     content = loading
       ? <div className="article-preview">Articles are been loading...</div>
       : <div>
         {this.genList()}
         <Pagination
+          page={page}
           articlesCount={articlesCount}
           onFetchPaging={onFetchPaging}
           pageNow={pageNow}
           onFetchFeedByUser={onFetchFeedByUser}
           onFetchArticleByTag={onFetchArticleByTag}
           articleTag={articleTag}
+          handleChangeState={this.handleChangeState}
         />
       </div>
     return content;
