@@ -43,6 +43,10 @@ import {
   FETCH_ARTICLES_BY_USER_SUCCEEDED,
   FETCH_ARTICLES_BY_USER_FAILED,
 
+  FETCH_FAVORITED_ARTICLES,
+  FETCH_FAVORITED_ARTICLES_SUCCEEDED,
+  FETCH_FAVORITED_ARTICLES_FAILED,
+
   FETCH_COMMENTS,
   FETCH_COMMENTS_SUCCEEDED,
   FETCH_COMMENTS_FAILED,
@@ -50,6 +54,10 @@ import {
   POST_COMMENT,
   POST_COMMENT_SUCCEEDED,
   POST_COMMENT_FAILED,
+
+  DEL_COMMENT,
+  DEL_COMMENT_SUCCEEDED,
+  DEL_COMMENT_FAILED,
 
   FETCH_TAGS_SUCCEEDED,
   FETCH_TAGS_FAILED,
@@ -269,6 +277,26 @@ export const myArticlesFailedAction = (error) => {
   }
 }
 
+export const fetchFavoritedArticlesAction = (username, page) => {
+  return {
+    type: FETCH_FAVORITED_ARTICLES,
+    username,
+    page
+  }
+}
+export const favoritedArticlesSuccessAction = (receivedArticles) => {
+  return {
+    type: FETCH_FAVORITED_ARTICLES_SUCCEEDED,
+    receivedArticles
+  }
+}
+export const favoritedArticlesFailedAction = (error) => {
+  return {
+    type: FETCH_FAVORITED_ARTICLES_FAILED,
+    error
+  }
+}
+
 // TAGS
 export const tagsSuccessAction = (receivedTags) => {
   return {
@@ -318,6 +346,26 @@ export const postCommentSuccessAction = (receivedCmt) => {
 export const postCommentFailedAction = (error) => {
   return {
     type: POST_COMMENT_FAILED,
+    error
+  }
+}
+
+export const delCommentAction = (slug, id) => {
+  return {
+    type: DEL_COMMENT,
+    slug,
+    id
+  }
+}
+export const delCommentSuccessAction = (id) => {
+  return {
+    type: DEL_COMMENT_SUCCEEDED,
+    id
+  }
+}
+export const delCommentFailedAction = (error) => {
+  return {
+    type: DEL_COMMENT_FAILED,
     error
   }
 }

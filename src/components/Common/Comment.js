@@ -24,22 +24,34 @@ export class Comment extends Component {
     this.setState({...this.state, body: ''});
   }
 
+  handleClick = (id, e) => {
+    e.preventDefault();
+    const { onDelComment } = this.props;
+    const slug = this.props.id;
+    onDelComment(slug, id);
+  }
+
   genCmts = () => {
     const { comments, user } = this.props;
     if(comments.length) return comments.map((cmt, index) => {
       const del = cmt.author.username === user.username
-                  ? <span className="mod-options"><i className="ion-trash-a"></i></span>
+                  ? <span
+                      className="mod-options"
+                      onClick={(e) => this.handleClick(cmt.id, e)}
+                    >
+                      <i className="ion-trash-a"></i>
+                    </span>
                   : '';
       return <div key={index} className="card">
         <div className="card-block">
           <p className="card-text">{cmt.body}</p>
         </div>
         <div className="card-footer">
-          <a href="" className="comment-author">
+          <a href={`/${cmt.author.username}`} className="comment-author">
             <img src={cmt.author.image} className="comment-author-img" alt="img user"/>
           </a>
           &nbsp;
-          <a href="" className="comment-author">{cmt.author.username}</a>
+          <a href={`/${cmt.author.username}`} className="comment-author">{cmt.author.username}</a>
           <span className="date-posted">{this.formatDate(cmt.createdAt)}</span>
           {del}
         </div>
@@ -88,7 +100,6 @@ export class Comment extends Component {
   }
 
   render() {
-    const { user } = this.props;
     return (
       <div className="row">
         <div className="col-xs-12 col-md-8 offset-md-2">

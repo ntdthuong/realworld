@@ -25,7 +25,7 @@ export class ArticleDetails extends Component {
 
   render() {
     const { id } = this.props.info.match.params;
-    const { article, comments, user, onPostComment } = this.props;
+    const { article, comments, user, onPostComment, onDelComment } = this.props;
     const body = article.body ? article.body.split('\n'): '';
     const { username, image } = article.author ? article.author : '';
     return (
@@ -63,7 +63,13 @@ export class ArticleDetails extends Component {
             </div>
           </div>
           <hr />
-          <Comment comments={comments} user={user} id={id} onPostComment={onPostComment}/>
+          <Comment
+            comments={comments}
+            user={user}
+            id={id}
+            onPostComment={onPostComment}
+            onDelComment={onDelComment}
+          />
         </div>
       </div>
     );

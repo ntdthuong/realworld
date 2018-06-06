@@ -1,6 +1,11 @@
 import { connect } from 'react-redux';
 
-import { profileAction, fetchArticlesByUserAction } from '../actions';
+import {
+  profileAction,
+  fetchArticlesByUserAction,
+  favoriteAction,
+  fetchFavoritedArticlesAction
+} from '../actions';
 import { Profile } from '../components/User/Profile';
 
 const mapStateToProps = (state) => {
@@ -17,7 +22,14 @@ const mapDispatchToProps = (dispatch, props) => {
     },
     onGetMyArticles : (page) => {
       dispatch(fetchArticlesByUserAction(page));
+    },
+    onFavoriteAction: (favorited, slug, index) => {
+      dispatch(favoriteAction(favorited, slug, index));
+    },
+    onGetFavoriteAction: (username, page) => {
+      dispatch(fetchFavoritedArticlesAction(username, page));
     }
+
   }
 };
 

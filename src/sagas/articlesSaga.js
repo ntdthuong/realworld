@@ -10,7 +10,7 @@ import {
   editorArticleFailedAction,
   fetchFeedByUserSuccessAction,
   favoriteSuccessAction,
-  // favoriteFailedAction
+  favoriteFailedAction
 } from '../actions';
 import {
   FETCH_PAGING,
@@ -83,7 +83,7 @@ function* favoriteArticle(action) {
     const article = yield Api.favoriteApi(action.favorited, action.slug, token);
     yield put(favoriteSuccessAction(article, action.index));
   } catch (error) {
-    // yield put(favoriteFailedAction(error.response.data));
+    yield put(favoriteFailedAction(error.response.data));
   }
 }
 

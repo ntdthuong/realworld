@@ -4,12 +4,10 @@ export class Pagination extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: props.page,
+      page: 1,
       pageNow: props.pageNow || '',
       articleTag: props.articleTag || '',
-      loading: props.loading
     };
-    this.handleChangeState = this.props.handleChangeState.bind(this);
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -20,18 +18,12 @@ export class Pagination extends Component {
         articleTag: nextProps.articleTag
       };
     }
-    return {
-      page: prevState.page,
-    };
+    return null;
   }
 
   handleClick = (i, e) => {
     e.preventDefault();
-    this.setState({
-      page: i,
-      loading: true
-    });
-    this.handleChangeState(i);
+    this.setState({page: i});
     const {
       pageNow,
       onFetchPaging,
@@ -39,14 +31,14 @@ export class Pagination extends Component {
       onFetchArticleByTag,
       articleTag
     } = this.props;
-    if(pageNow === 'feed') onFetchFeedByUser((i-1)*2);
-    if(pageNow === 'global') onFetchPaging((i-1)*2);
-    if(pageNow === 'tag') onFetchArticleByTag(articleTag, (i-1)*2);
+    if(pageNow === 'feed') onFetchFeedByUser((i-1)*10);
+    if(pageNow === 'global') onFetchPaging((i-1)*10);
+    if(pageNow === 'tag') onFetchArticleByTag(articleTag, (i-1)*10);
   }
 
   genPaging = () => {
     const { articlesCount } = this.props;
-    const { page, loading } = this.state;
+    const { page } = this.state;
     let arrPage = [];
     for(let i=1; i<= Math.ceil(articlesCount/10); i++) {
       const customClass = page === i ? 'page-item active' : 'page-item';

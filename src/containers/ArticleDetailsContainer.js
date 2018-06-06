@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import {
   fetchArticleAction,
   fetchCommentsAction,
-  postCommentAction
+  postCommentAction,
+  delCommentAction
 } from '../actions';
 import { ArticleDetails } from '../components/Articles/ArticleDetails';
 
@@ -26,6 +27,9 @@ const mapDispatchToProps = (dispatch, props) => {
     },
     onPostComment: (id, comment) => {
       dispatch(postCommentAction(id, comment));
+    },
+    onDelComment: (slug, id) => {
+      dispatch(delCommentAction(slug, id));
     }
   }
 };

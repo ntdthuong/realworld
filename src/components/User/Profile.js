@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { ToggleTab } from './ToggleTab';
-import { ArticlePreview } from '../Home/ArticlePreview';
+import { FeedToggle } from '../Common/FeedToggle';
+import { ArticlePreview } from '../Common/ArticlePreview';
 import { Pagination } from '../Common/Pagination';
 
 export class Profile extends Component {
@@ -15,13 +15,14 @@ export class Profile extends Component {
   }
 
   genList = () => {
-    const { articles} = this.props.articles;
+    const { articles } = this.props.articles;
     if(articles) {
       if(articles.length) return articles.map((article, index) =>
         <ArticlePreview
           key={index}
           articleInfo={article}
           index={index}
+          onFavoriteAction={this.props.onFavoriteAction}
         />
       );
       if(!articles.length) return <div className="article-preview">No articles are here... yet.</div>
@@ -29,7 +30,9 @@ export class Profile extends Component {
   }
 
   render() {
-    const { profile, articles } = this.props;
+    const { profile, articles, onGetMyArticles, onGetFavoriteAction } = this.props;
+    const pathName = this.props.info.match.path;
+    const username = this.props.info.match.params.id;
     return (
       <div className="profile-page">
         <div className="user-info">
@@ -57,7 +60,13 @@ export class Profile extends Component {
         <div className="container">
           <div className="row">
             <div className="col-xs-12 col-md-10 offset-md-1">
-              <ToggleTab pageNow={articles.pageNow}/>
+              <FeedToggle
+                articles={articles}
+                pathName={pathName}
+                username={username}
+                onGetMyArticles={onGetMyArticles}
+                onGetFavoriteAction={onGetFavoriteAction}
+              />
               <div>
                 {this.genList()}
                 <Pagination
