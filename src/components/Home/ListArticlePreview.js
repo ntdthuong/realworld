@@ -12,12 +12,15 @@ export class ListArticlePreview extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps && nextProps.articles && (nextProps.page === prevState.currentPage)) {
+    console.log('nextProps',nextProps);
+    console.log('prevState',prevState);
+    if (nextProps && nextProps.articles && (nextProps.page === prevState.currentPage) && (nextProps.pageNow === prevState.pageNow)) {
       return {
         loading: false,
         pageNow: nextProps.pageNow
       }
-    } else if ((nextProps.page !== prevState.currentPage) && !prevState.loading) {
+    } else if(((nextProps.page !== prevState.currentPage) && !prevState.loading) || (nextProps.pageNow !== prevState.pageNow)) {
+      console.log('vào')
       return {
         loading: true,
         currentPage: 1,

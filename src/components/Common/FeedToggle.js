@@ -4,6 +4,7 @@ export class FeedToggle extends Component {
 
   hanldeClick = (name, page, e) => {
     e.preventDefault();
+    console.log('click tabs');
     const { onFetchPaging, onFetchFeedByUser } = this.props;
     if(name === 'global') onFetchPaging(page);
     if(name === 'feed') onFetchFeedByUser();

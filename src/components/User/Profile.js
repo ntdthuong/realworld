@@ -15,17 +15,24 @@ export class Profile extends Component {
   }
 
   genList = () => {
-    const { articles} = this.props.articles;
-    if(articles) {
-      if(articles.length) return articles.map((article, index) =>
+    const { articles } = this.props.articles;
+    if (articles) {
+      if (articles.length) return articles.map((article, index) =>
         <ArticlePreview
           key={index}
           articleInfo={article}
           index={index}
         />
       );
-      if(!articles.length) return <div className="article-preview">No articles are here... yet.</div>
+      if (!articles.length) return <div className="article-preview">No articles are here... yet.</div>
     }
+  }
+
+  handleChangeState = (page) => {
+    this.setState({
+      page: page,
+      currentPage: page
+    })
   }
 
   render() {
@@ -37,7 +44,7 @@ export class Profile extends Component {
             <div className="row">
 
               <div className="col-xs-12 col-md-10 offset-md-1">
-                <img src={profile.image ? profile.image : 'https://static.productionready.io/images/smiley-cyrus.jpg'} className="user-img" alt="img user"/>
+                <img src={profile.image ? profile.image : 'https://static.productionready.io/images/smiley-cyrus.jpg'} className="user-img" alt="img user" />
                 <h4>{profile.username}</h4>
                 <p>{profile.bio}</p>
                 <Link
@@ -57,18 +64,18 @@ export class Profile extends Component {
         <div className="container">
           <div className="row">
             <div className="col-xs-12 col-md-10 offset-md-1">
-              <ToggleTab pageNow={articles.pageNow}/>
+              <ToggleTab pageNow={articles.pageNow} />
               <div>
                 {this.genList()}
                 <Pagination
                   articlesCount={articles.articlesCount}
                   pageNow={articles.pageNow}
+                  handleChangeState={this.handleChangeState}
                 />
               </div>
             </div>
           </div>
         </div>
-
       </div>
     );
   }

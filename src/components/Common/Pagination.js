@@ -39,16 +39,16 @@ export class Pagination extends Component {
       onFetchArticleByTag,
       articleTag
     } = this.props;
-    if(pageNow === 'feed') onFetchFeedByUser((i-1)*2);
-    if(pageNow === 'global') onFetchPaging((i-1)*2);
-    if(pageNow === 'tag') onFetchArticleByTag(articleTag, (i-1)*2);
+    if (pageNow === 'feed') onFetchFeedByUser((i - 1) * 2);
+    if (pageNow === 'global') onFetchPaging((i - 1) * 2);
+    if (pageNow === 'tag') onFetchArticleByTag(articleTag, (i - 1) * 2);
   }
 
   genPaging = () => {
     const { articlesCount } = this.props;
     const { page, loading } = this.state;
     let arrPage = [];
-    for(let i=1; i<= Math.ceil(articlesCount/10); i++) {
+    for (let i = 1; i <= Math.ceil(articlesCount / 10); i++) {
       const customClass = page === i ? 'page-item active' : 'page-item';
       arrPage.push(
         <li
