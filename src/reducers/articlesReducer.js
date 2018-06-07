@@ -22,7 +22,12 @@ export function articlesReducer(state = {} , action) {
     case FAVORITE_ARTICLE_SUCCEEDED:
       const { receivedArticle, index } = action;
       let newArticle = state.articles[index]=receivedArticle;
-      return {...state, newArticle};
+      if(state.pageNow === 'favoritedArticles') {
+        const filter =  [...state.articles].filter((cmt, i) => i !== index);
+        return {articles: filter, pageNow: 'favoritedArticles'}
+      } else {
+        return {...state, newArticle};
+      }
     case FETCH_FAVORITED_ARTICLES_SUCCEEDED:
       return {...action.receivedArticles, pageNow: 'favoritedArticles'};
     case FETCH_ARTICLES_FAILED:

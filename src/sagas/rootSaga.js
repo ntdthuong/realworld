@@ -16,6 +16,7 @@ import {
   watchFetchFavoritedArticles
 } from './profileSaga';
 import { watchGetComments, watchPostComment, watchDelComment } from './commentsSaga';
+import { watchToggleFollow } from './followSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -37,6 +38,7 @@ export default function* rootSaga() {
     call(watchGetComments),
     call(watchPostComment),
     call(watchDelComment),
-    call(watchFetchFavoritedArticles)
+    call(watchFetchFavoritedArticles),
+    call(watchToggleFollow)
   ])
 }

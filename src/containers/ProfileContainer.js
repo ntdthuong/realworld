@@ -4,14 +4,16 @@ import {
   profileAction,
   fetchArticlesByUserAction,
   favoriteAction,
-  fetchFavoritedArticlesAction
+  fetchFavoritedArticlesAction,
+  followAction
 } from '../actions';
 import { Profile } from '../components/User/Profile';
 
 const mapStateToProps = (state) => {
   return {
     articles: state.articles,
-    profile: state.profile
+    profile: state.profile,
+    user: state.user
   }
 };
 
@@ -20,14 +22,17 @@ const mapDispatchToProps = (dispatch, props) => {
     onGetProfile: (username) => {
       dispatch(profileAction(username));
     },
-    onGetMyArticles : (page) => {
-      dispatch(fetchArticlesByUserAction(page));
+    onGetMyArticles : (username, page) => {
+      dispatch(fetchArticlesByUserAction(username, page));
     },
     onFavoriteAction: (favorited, slug, index) => {
       dispatch(favoriteAction(favorited, slug, index));
     },
     onGetFavoriteAction: (username, page) => {
       dispatch(fetchFavoritedArticlesAction(username, page));
+    },
+    onFollowAction: (username, follow) => {
+      dispatch(followAction(username, follow));
     }
 
   }

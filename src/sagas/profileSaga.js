@@ -20,7 +20,8 @@ import { Api } from '../helpers/Api';
 
 function* fetchProfile(action) {
   try {
-    const profile = yield Api.getProfileFromApi(action.username);
+    const token = localStorage.getItem('jwt');
+    const profile = yield Api.getProfileFromApi(action.username, token);
     yield put(profileSuccessAction(profile));
   } catch (error) {
     yield put(profileFailedAction(error.response.data));
@@ -48,7 +49,7 @@ export function* watchEditProfile() {
 function* fetchArticlesByUser(action) {
   try {
     const token = localStorage.getItem('jwt');
-    const articles = yield Api.getArticlesByUser(action.username, token);
+    const articles = yield Api.getArticlesByUser(action.username, token, action.page);
     yield put(myArticlesSuccessAction(articles));
   } catch (error) {
     yield put(fetchArticlesFailedAction(error.response.data));

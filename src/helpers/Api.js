@@ -42,11 +42,15 @@ function* getUserfromApi(token) {
 }
 
 // PROFILE
-function* getProfileFromApi(params) {
-  const profile = yield axios.get(`${url}${url_profile}${params}`)
-  .then(res => {
-    return res.data.profile;
-  })
+function* getProfileFromApi(username, token) {
+  const profile = yield axios({
+      method: 'get',
+      url: `${url}${url_profile}${username}`,
+      headers: token ? {authorization: `Token ${token}`} : ''
+    })
+    .then(res => {
+      return res.data.profile;
+    })
   return profile;
 }
 
@@ -118,7 +122,7 @@ function* getArticlesByUser(username, token, params) {
   const sub = params ? `${params}` : '0';
   const articles = yield axios({
       method: 'get',
-      url: `${url}articles?author=${username}&limit=5&offset=${sub}}`,
+      url: `${url}articles?author=${username}&limit=5&offset=${sub}`,
       headers: {authorization: `Token ${token}`}
     })
     .then(res => {
@@ -227,6 +231,20 @@ function* delCommentFromApi(slug, token, id) {
   return cmt;
 }
 
+// FOLLOW
+function* toggleFollow(username, follow, token) {
+  const method = follow ? 'delete' : 'post';
+  const profile = yield axios({
+    method: method,
+    url: `${url}${url_profile}${username}/follow`,
+    headers: {authorization: `Token ${token}`}
+  })
+  .then(res => {
+    return res.data.profile;
+  })
+  return profile;
+}
+
 export const Api = {
   getArticlesFromApi,
   getArticleFromApi,
@@ -245,5 +263,6 @@ export const Api = {
   getCommentsFromApi,
   postCommentToApi,
   delCommentFromApi,
-  getFavoriteApi
+  getFavoriteApi,
+  toggleFollow
 }

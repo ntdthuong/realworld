@@ -29,6 +29,34 @@ export class Profile extends Component {
     }
   }
 
+  handleClick = (username, follow, e) => {
+    const { onFollowAction } = this.props;
+    e.preventDefault();
+    onFollowAction(username, follow);
+  }
+
+  genBtn = () => {
+    const { profile, user } = this.props;
+    const { username, following } = profile;
+    const follow = following ? 'Unfollow' : 'Follow';
+    return username !== user.username
+            ? <button
+                className="btn btn-sm action-btn btn-outline-secondary"
+                onClick={(e) => this.handleClick(username, following, e)}
+              >
+                <i className="ion-plus-round"></i>
+                &nbsp;{follow} {profile.username}
+              </button>
+            : <Link
+                className="btn btn-sm btn-outline-secondary action-btn"
+                to='/settings'
+              >
+                <i className="ion-gear-a"></i>
+                &nbsp;
+                Edit Profile Settings
+              </Link>
+  }
+
   render() {
     const { profile, articles, onGetMyArticles, onGetFavoriteAction } = this.props;
     const pathName = this.props.info.match.path;
@@ -43,14 +71,8 @@ export class Profile extends Component {
                 <img src={profile.image ? profile.image : 'https://static.productionready.io/images/smiley-cyrus.jpg'} className="user-img" alt="img user"/>
                 <h4>{profile.username}</h4>
                 <p>{profile.bio}</p>
-                <Link
-                  className="btn btn-sm btn-outline-secondary action-btn"
-                  to='/settings'
-                >
-                  <i className="ion-gear-a"></i>
-                  &nbsp;
-                  Edit Profile Settings
-                </Link>
+
+                { this.genBtn()}
               </div>
 
             </div>
@@ -72,6 +94,10 @@ export class Profile extends Component {
                 <Pagination
                   articlesCount={articles.articlesCount}
                   pageNow={articles.pageNow}
+                  onGetMyArticles={onGetMyArticles}
+                  onGetFavoriteAction={onGetFavoriteAction}
+                  username={username}
+                  pathName={pathName}
                 />
               </div>
             </div>

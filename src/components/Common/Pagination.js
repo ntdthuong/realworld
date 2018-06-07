@@ -29,18 +29,24 @@ export class Pagination extends Component {
       onFetchPaging,
       onFetchFeedByUser,
       onFetchArticleByTag,
-      articleTag
+      articleTag,
+      onGetMyArticles,
+      onGetFavoriteAction,
+      username
     } = this.props;
     if(pageNow === 'feed') onFetchFeedByUser((i-1)*10);
     if(pageNow === 'global') onFetchPaging((i-1)*10);
     if(pageNow === 'tag') onFetchArticleByTag(articleTag, (i-1)*10);
+    if(pageNow === 'myArticles') onGetMyArticles(username, (i-1)*5);
+    if(pageNow === 'favoritedArticles') onGetFavoriteAction(username, (i-1)*5);
   }
 
   genPaging = () => {
-    const { articlesCount } = this.props;
+    const { articlesCount, pathName } = this.props;
     const { page } = this.state;
     let arrPage = [];
-    for(let i=1; i<= Math.ceil(articlesCount/10); i++) {
+    const limit = pathName === '/:id' ? 5 : 10;
+    for(let i=1; i<= Math.ceil(articlesCount/limit); i++) {
       const customClass = page === i ? 'page-item active' : 'page-item';
       arrPage.push(
         <li

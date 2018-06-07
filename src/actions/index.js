@@ -34,6 +34,10 @@ import {
   EDIT_PROFILE_SUCCESS,
   EDIT_PROFILE_FAILED,
 
+  TOGGLE_FOLLOW,
+  TOGGLE_FOLLOW_SUCCESS,
+  TOGGLE_FOLLOW_FAILED,
+
   FETCH_ARTICLES_BY_TAG,
   FETCH_ARTICLES_BY_TAG_SUCCEEDED,
   FETCH_FEED_BY_USER,
@@ -193,10 +197,11 @@ export const userFailedAction = (error) => {
 }
 
 // PROFILE
-export const profileAction = (username) => {
+export const profileAction = (username, token) => {
   return {
     type: FETCH_PROFILE,
-    username
+    username,
+    token
   }
 }
 export const profileFailedAction = (error) => {
@@ -228,6 +233,27 @@ export const editProfileFailedAction = (error) => {
   return {
     type: EDIT_PROFILE_FAILED,
     error
+  }
+}
+
+// FOLLOW
+export const followAction = (username, follow) => {
+  return {
+    type: TOGGLE_FOLLOW,
+    username,
+    follow
+  }
+}
+export const followFailedAction = (error) => {
+  return {
+    type: TOGGLE_FOLLOW_FAILED,
+    error
+  }
+}
+export const followSuccessAction = (receivedProfile) => {
+  return {
+    type: TOGGLE_FOLLOW_SUCCESS,
+    receivedProfile
   }
 }
 
