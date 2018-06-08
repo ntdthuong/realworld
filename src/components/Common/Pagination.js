@@ -58,7 +58,7 @@ export class Pagination extends Component {
         </li>
       );
     }
-    return arrPage
+    if(articlesCount/limit > 1) return arrPage
   }
 
   render() {

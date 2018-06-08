@@ -102,7 +102,7 @@ export class Settings extends Component {
 
               {this.handleError()}
 
-              <form onSubmit={this.handleSumit}>
+              <form onSubmit={this.handleSumit} autoComplete="off">
                 <fieldset>
                   {this.genField()}
                   <button className="btn btn-lg btn-primary pull-xs-right">

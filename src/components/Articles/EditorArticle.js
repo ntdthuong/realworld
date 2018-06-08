@@ -110,7 +110,7 @@ export class EditorArticle extends Component {
           <div className="row">
             <div className="col-md-10 offset-md-1 col-xs-12">
               {this.handleError()}
-              <form onSubmit={this.handleSubmit}>
+              <form onSubmit={this.handleSubmit} autoComplete="off">
                 <fieldset>
                   {this.genField()}
                   <button className="btn btn-lg pull-xs-right btn-primary" type="submit">

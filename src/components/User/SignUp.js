@@ -47,6 +47,7 @@ export class SignUp extends Component {
               {this.handleError()}
               <form
                 onSubmit={this.handleSubmit}
+                autoComplete="off"
               >
                 <fieldset className="form-group">
                   <input
