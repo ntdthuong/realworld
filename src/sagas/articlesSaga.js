@@ -10,14 +10,17 @@ import {
   editorArticleFailedAction,
   fetchFeedByUserSuccessAction,
   favoriteSuccessAction,
-  favoriteFailedAction
+  favoriteFailedAction,
+  // delArticleSuccessAction,
+  delArticleFailedAction
 } from '../actions';
 import {
   FETCH_PAGING,
   EDITOR_ARTICLE,
   FETCH_ARTICLE,
   FETCH_FEED_BY_USER,
-  FAVORITE_ARTICLE
+  FAVORITE_ARTICLE,
+  DEL_ARTICLE
 } from '../actions/actionTypes';
 import { Api } from '../helpers/Api';
 
@@ -77,6 +80,7 @@ function* fetchFeedByUser(action) {
 export function* watchFetchFeedByUser() {
   yield takeLatest(FETCH_FEED_BY_USER, fetchFeedByUser)
 }
+
 function* favoriteArticle(action) {
   try {
     const token = localStorage.getItem('jwt');
@@ -89,4 +93,18 @@ function* favoriteArticle(action) {
 
 export function* watchFavoriteArticle() {
   yield takeLatest(FAVORITE_ARTICLE, favoriteArticle)
+}
+
+function* delArticle(action) {
+  try {
+    const token = localStorage.getItem('jwt');
+    yield Api.delArticleFromApi(token, action.slug);
+    // yield put(delArticleSuccessAction());
+  } catch (error) {
+    yield put(delArticleFailedAction(error.response.data));
+  }
+}
+
+export function* watchDelArticle() {
+  yield takeLatest(DEL_ARTICLE, delArticle)
 }

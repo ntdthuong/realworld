@@ -23,6 +23,12 @@ export class ArticleDetails extends Component {
     }
   }
 
+  delArticle = () => {
+    const { id } = this.props.info.match.params;
+    const { onDelArticle } = this.props;
+    onDelArticle(id);
+  }
+
   render() {
     const { id } = this.props.info.match.params;
     const { article, comments, user, onPostComment, onDelComment } = this.props;
@@ -41,7 +47,10 @@ export class ArticleDetails extends Component {
               </div>
               <a className="btn btn-outline-secondary btn-sm" href={`/editor/${id}`}><i className="ion-edit"></i>&nbsp;&nbsp;Edit Article</a>
               &nbsp;&nbsp;
-              <button className="btn btn-sm btn-outline-danger">
+              <button
+                className="btn btn-sm btn-outline-danger"
+                onClick={this.delArticle}
+              >
                 <i className="ion-trash-a"></i>
                 &nbsp;
                 Delete Article

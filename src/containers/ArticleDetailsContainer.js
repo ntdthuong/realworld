@@ -4,7 +4,8 @@ import {
   fetchArticleAction,
   fetchCommentsAction,
   postCommentAction,
-  delCommentAction
+  delCommentAction,
+  delArticleAction
 } from '../actions';
 import { ArticleDetails } from '../components/Articles/ArticleDetails';
 
@@ -30,6 +31,9 @@ const mapDispatchToProps = (dispatch, props) => {
     },
     onDelComment: (slug, id) => {
       dispatch(delCommentAction(slug, id));
+    },
+    onDelArticle: (slug) => {
+      dispatch(delArticleAction(slug));
     }
   }
 };

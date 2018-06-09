@@ -167,6 +167,21 @@ function* putArticleToApi(token, article, id) {
   return recievedArticle;
 }
 
+function* delArticleFromApi(token, slug) {
+  const recievedArticle = yield axios({
+        method: 'delete',
+        url: `${url}${url_dfArticles}${slug}`,
+        headers: {authorization: `Token ${token}`}
+      })
+      .then(res => {
+        history.push('/');
+        console.log('del', res.data.article)
+        return res.data.article;
+      })
+  return recievedArticle;
+}
+
+
 function* favoriteApi(favorited, slug, token) {
   const method = favorited ? 'delete' : 'post';
   const userInfo = yield axios({
@@ -264,5 +279,6 @@ export const Api = {
   postCommentToApi,
   delCommentFromApi,
   getFavoriteApi,
-  toggleFollow
+  toggleFollow,
+  delArticleFromApi
 }
