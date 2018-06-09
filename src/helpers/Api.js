@@ -42,11 +42,15 @@ function* getUserfromApi(token) {
 }
 
 // PROFILE
-function* getProfileFromApi(params) {
-  const profile = yield axios.get(`${url}${url_profile}${params}`)
-  .then(res => {
-    return res.data.profile;
-  })
+function* getProfileFromApi(username, token) {
+  const profile = yield axios({
+      method: 'get',
+      url: `${url}${url_profile}${username}`,
+      headers: token ? {authorization: `Token ${token}`} : ''
+    })
+    .then(res => {
+      return res.data.profile;
+    })
   return profile;
 }
 
@@ -114,12 +118,16 @@ function* getFeedByUser(token, params) {
   return articles;
 }
 
-function* getArticlesByUser(username, params) {
+function* getArticlesByUser(username, token, params) {
   const sub = params ? `${params}` : '0';
-  const articles = yield axios.get(`${url}articles?author=${username}&limit=5&offset=${sub}}`)
-      .then(res => {
-        return res.data;
-      })
+  const articles = yield axios({
+      method: 'get',
+      url: `${url}articles?author=${username}&limit=5&offset=${sub}`,
+      headers: {authorization: `Token ${token}`}
+    })
+    .then(res => {
+      return res.data;
+    })
   return articles;
 }
 
@@ -159,6 +167,21 @@ function* putArticleToApi(token, article, id) {
   return recievedArticle;
 }
 
+function* delArticleFromApi(token, slug) {
+  const recievedArticle = yield axios({
+        method: 'delete',
+        url: `${url}${url_dfArticles}${slug}`,
+        headers: {authorization: `Token ${token}`}
+      })
+      .then(res => {
+        history.push('/');
+        console.log('del', res.data.article)
+        return res.data.article;
+      })
+  return recievedArticle;
+}
+
+
 function* favoriteApi(favorited, slug, token) {
   const method = favorited ? 'delete' : 'post';
   const userInfo = yield axios({
@@ -170,6 +193,19 @@ function* favoriteApi(favorited, slug, token) {
       return res.data.article;
     })
   return userInfo;
+}
+
+function* getFavoriteApi(id, token, params) {
+  const sub = params ? `${params}` : '0';
+  const articles = yield axios({
+      method: 'get',
+      url: `${url}articles?favorited=${id}&limit=5&offset=${sub}`,
+      headers: token ? {authorization: `Token ${token}`} : ''
+    })
+    .then(res => {
+      return res.data;
+    })
+  return articles;
 }
 
 // COMMENT
@@ -198,6 +234,32 @@ function* postCommentToApi(id, token, comment) {
   return cmt;
 }
 
+function* delCommentFromApi(slug, token, id) {
+  const cmt = yield axios({
+      method: 'delete',
+      url: `${url}${url_dfArticles}${slug}/comments/${id}`,
+      headers: token ? {authorization: `Token ${token}`} : ''
+    })
+    .then(res => {
+      return res.data;
+    })
+  return cmt;
+}
+
+// FOLLOW
+function* toggleFollow(username, follow, token) {
+  const method = follow ? 'delete' : 'post';
+  const profile = yield axios({
+    method: method,
+    url: `${url}${url_profile}${username}/follow`,
+    headers: {authorization: `Token ${token}`}
+  })
+  .then(res => {
+    return res.data.profile;
+  })
+  return profile;
+}
+
 export const Api = {
   getArticlesFromApi,
   getArticleFromApi,
@@ -214,5 +276,9 @@ export const Api = {
   favoriteApi,
   getArticlesByUser,
   getCommentsFromApi,
-  postCommentToApi
+  postCommentToApi,
+  delCommentFromApi,
+  getFavoriteApi,
+  toggleFollow,
+  delArticleFromApi
 }

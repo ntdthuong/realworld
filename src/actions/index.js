@@ -4,17 +4,34 @@ import {
   FETCH_ARTICLES_FAILED,
   FETCH_PAGING,
 
-  FETCH_ARTICLE,
-  FETCH_ARTICLE_SUCCEEDED,
-  FETCH_ARTICLE_FAILED,
+  FETCH_ARTICLES_BY_TAG,
+  FETCH_ARTICLES_BY_TAG_SUCCEEDED,
+  FETCH_FEED_BY_USER,
+  FETCH_FEED_BY_USER_SUCCEEDED,
+
+  FETCH_ARTICLES_BY_USER,
+  FETCH_ARTICLES_BY_USER_SUCCEEDED,
+  FETCH_ARTICLES_BY_USER_FAILED,
+
+  FETCH_FAVORITED_ARTICLES,
+  FETCH_FAVORITED_ARTICLES_SUCCEEDED,
+  FETCH_FAVORITED_ARTICLES_FAILED,
 
   FAVORITE_ARTICLE,
   FAVORITE_ARTICLE_SUCCEEDED,
   FAVORITE_ARTICLE_FAILED,
 
+  FETCH_ARTICLE,
+  FETCH_ARTICLE_SUCCEEDED,
+  FETCH_ARTICLE_FAILED,
+
   EDITOR_ARTICLE,
   EDITOR_ARTICLE_SUCCEEDED,
   EDITOR_ARTICLE_FAILED,
+
+  DEL_ARTICLE,
+  DEL_ARTICLE_SUCCEEDED,
+  DEL_ARTICLE_FAILED,
 
   // FETCH_SUCCEEDED,
   // FETCH_FAILED,
@@ -34,14 +51,9 @@ import {
   EDIT_PROFILE_SUCCESS,
   EDIT_PROFILE_FAILED,
 
-  FETCH_ARTICLES_BY_TAG,
-  FETCH_ARTICLES_BY_TAG_SUCCEEDED,
-  FETCH_FEED_BY_USER,
-  FETCH_FEED_BY_USER_SUCCEEDED,
-
-  FETCH_ARTICLES_BY_USER,
-  FETCH_ARTICLES_BY_USER_SUCCEEDED,
-  FETCH_ARTICLES_BY_USER_FAILED,
+  TOGGLE_FOLLOW,
+  TOGGLE_FOLLOW_SUCCESS,
+  TOGGLE_FOLLOW_FAILED,
 
   FETCH_COMMENTS,
   FETCH_COMMENTS_SUCCEEDED,
@@ -50,6 +62,10 @@ import {
   POST_COMMENT,
   POST_COMMENT_SUCCEEDED,
   POST_COMMENT_FAILED,
+
+  DEL_COMMENT,
+  DEL_COMMENT_SUCCEEDED,
+  DEL_COMMENT_FAILED,
 
   FETCH_TAGS_SUCCEEDED,
   FETCH_TAGS_FAILED,
@@ -147,6 +163,25 @@ export const editorArticleFailedAction = (error) => {
   }
 }
 
+export const delArticleAction = (slug) => {
+  return {
+    type: DEL_ARTICLE,
+    slug
+  }
+}
+export const delArticleSuccessAction = (receivedArticle) => {
+  return {
+    type: DEL_ARTICLE_SUCCEEDED,
+    receivedArticle
+  }
+}
+export const delArticleFailedAction = (error) => {
+  return {
+    type: DEL_ARTICLE_FAILED,
+    error
+  }
+}
+
 // USER
 export const signUpAction = (user) => {
   return {
@@ -185,10 +220,11 @@ export const userFailedAction = (error) => {
 }
 
 // PROFILE
-export const profileAction = (username) => {
+export const profileAction = (username, token) => {
   return {
     type: FETCH_PROFILE,
-    username
+    username,
+    token
   }
 }
 export const profileFailedAction = (error) => {
@@ -220,6 +256,27 @@ export const editProfileFailedAction = (error) => {
   return {
     type: EDIT_PROFILE_FAILED,
     error
+  }
+}
+
+// FOLLOW
+export const followAction = (username, follow) => {
+  return {
+    type: TOGGLE_FOLLOW,
+    username,
+    follow
+  }
+}
+export const followFailedAction = (error) => {
+  return {
+    type: TOGGLE_FOLLOW_FAILED,
+    error
+  }
+}
+export const followSuccessAction = (receivedProfile) => {
+  return {
+    type: TOGGLE_FOLLOW_SUCCESS,
+    receivedProfile
   }
 }
 
@@ -265,6 +322,26 @@ export const myArticlesSuccessAction = (receivedArticles) => {
 export const myArticlesFailedAction = (error) => {
   return {
     type: FETCH_ARTICLES_BY_USER_FAILED,
+    error
+  }
+}
+
+export const fetchFavoritedArticlesAction = (username, page) => {
+  return {
+    type: FETCH_FAVORITED_ARTICLES,
+    username,
+    page
+  }
+}
+export const favoritedArticlesSuccessAction = (receivedArticles) => {
+  return {
+    type: FETCH_FAVORITED_ARTICLES_SUCCEEDED,
+    receivedArticles
+  }
+}
+export const favoritedArticlesFailedAction = (error) => {
+  return {
+    type: FETCH_FAVORITED_ARTICLES_FAILED,
     error
   }
 }
@@ -318,6 +395,26 @@ export const postCommentSuccessAction = (receivedCmt) => {
 export const postCommentFailedAction = (error) => {
   return {
     type: POST_COMMENT_FAILED,
+    error
+  }
+}
+
+export const delCommentAction = (slug, id) => {
+  return {
+    type: DEL_COMMENT,
+    slug,
+    id
+  }
+}
+export const delCommentSuccessAction = (id) => {
+  return {
+    type: DEL_COMMENT_SUCCEEDED,
+    id
+  }
+}
+export const delCommentFailedAction = (error) => {
+  return {
+    type: DEL_COMMENT_FAILED,
     error
   }
 }

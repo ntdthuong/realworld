@@ -4,13 +4,20 @@ import {
   watchFetchArticle,
   watchEditorArticle,
   watchFetchFeedByUser,
-  watchFavoriteArticle
+  watchFavoriteArticle,
+  watchDelArticle
 } from './articlesSaga';
 import { fetchTags, watchFetchArticlesByTag } from './tagsSaga';
 import { watchSignUpUser, watchSignOutUser } from './signUpSaga';
 import { watchSignInUser, getUser, watchGetUser } from './signInSaga';
-import { watchFetchProfile, watchEditProfile, watchFetchArticlesByUser } from './profileSaga';
-import { watchGetComments, watchPostComment } from './commentsSaga';
+import {
+  watchFetchProfile,
+  watchEditProfile,
+  watchFetchArticlesByUser,
+  watchFetchFavoritedArticles
+} from './profileSaga';
+import { watchGetComments, watchPostComment, watchDelComment } from './commentsSaga';
+import { watchToggleFollow } from './followSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -30,6 +37,10 @@ export default function* rootSaga() {
     call(watchFavoriteArticle),
     call(watchFetchArticlesByUser),
     call(watchGetComments),
-    call(watchPostComment)
+    call(watchPostComment),
+    call(watchDelComment),
+    call(watchFetchFavoritedArticles),
+    call(watchToggleFollow),
+    call(watchDelArticle)
   ])
 }

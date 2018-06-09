@@ -6,18 +6,22 @@ import {
   editProfileSuccessAction,
   editProfileFailedAction,
   myArticlesSuccessAction,
-  fetchArticlesFailedAction
+  fetchArticlesFailedAction,
+  favoritedArticlesSuccessAction,
+  // favoritedArticlesFailedAction
 } from '../actions';
 import {
   FETCH_PROFILE,
   EDIT_PROFILE,
-  FETCH_ARTICLES_BY_USER
+  FETCH_ARTICLES_BY_USER,
+  FETCH_FAVORITED_ARTICLES
 } from '../actions/actionTypes';
 import { Api } from '../helpers/Api';
 
 function* fetchProfile(action) {
   try {
-    const profile = yield Api.getProfileFromApi(action.username);
+    const token = localStorage.getItem('jwt');
+    const profile = yield Api.getProfileFromApi(action.username, token);
     yield put(profileSuccessAction(profile));
   } catch (error) {
     yield put(profileFailedAction(error.response.data));
@@ -44,7 +48,8 @@ export function* watchEditProfile() {
 
 function* fetchArticlesByUser(action) {
   try {
-    const articles = yield Api.getArticlesByUser(action.username);
+    const token = localStorage.getItem('jwt');
+    const articles = yield Api.getArticlesByUser(action.username, token, action.page);
     yield put(myArticlesSuccessAction(articles));
   } catch (error) {
     yield put(fetchArticlesFailedAction(error.response.data));
@@ -53,4 +58,18 @@ function* fetchArticlesByUser(action) {
 
 export function* watchFetchArticlesByUser() {
   yield takeLatest(FETCH_ARTICLES_BY_USER, fetchArticlesByUser)
+}
+
+function* fetchFavoritedArticles(action) {
+  try {
+    const token = localStorage.getItem('jwt');
+    const articles = yield Api.getFavoriteApi(action.username, token, action.page);
+    yield put(favoritedArticlesSuccessAction(articles));
+  } catch (error) {
+    yield put(fetchArticlesFailedAction(error.response.data));
+  }
+}
+
+export function* watchFetchFavoritedArticles() {
+  yield takeLatest(FETCH_FAVORITED_ARTICLES, fetchFavoritedArticles)
 }

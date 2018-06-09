@@ -4,11 +4,14 @@ import {
   fetchCommentsSuccessAction,
   fetchCommentsFailedAction,
   postCommentSuccessAction,
-  postCommentFailedAction
+  postCommentFailedAction,
+  delCommentSuccessAction,
+  delCommentFailedAction
 } from '../actions';
 import {
   FETCH_COMMENTS,
-  POST_COMMENT
+  POST_COMMENT,
+  DEL_COMMENT
 } from '../actions/actionTypes';
 import { Api } from '../helpers/Api';
 
@@ -18,6 +21,7 @@ function* getComments(action) {
     const recievedCmts = yield Api.getCommentsFromApi(action.id, token);
     yield put(fetchCommentsSuccessAction(recievedCmts));
   } catch (error) {
+    alert('Delete fail');
     yield put(fetchCommentsFailedAction(error.response.data));
   }
 }
@@ -38,4 +42,18 @@ function* postComment(action) {
 
 export function* watchPostComment() {
   yield takeLatest(POST_COMMENT, postComment)
+}
+
+function* delComment(action) {
+  try {
+    const token = localStorage.getItem('jwt');
+    yield Api.delCommentFromApi(action.slug, token, action.id);
+    yield put(delCommentSuccessAction(action.id));
+  } catch (error) {
+    yield put(delCommentFailedAction(error.response.data));
+  }
+}
+
+export function* watchDelComment() {
+  yield takeLatest(DEL_COMMENT, delComment)
 }

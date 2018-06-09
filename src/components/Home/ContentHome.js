@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Banner } from './Banner';
 import { FeedToggle } from '../Common/FeedToggle';
-import { ListArticlePreview } from './ListArticlePreview';
+import { ListArticlePreview } from '../Common/ListArticlePreview';
 import { Tags } from './Tags';
 
 export class ContentHome extends Component {
@@ -29,7 +29,7 @@ export class ContentHome extends Component {
       user,
       onFavoriteAction
     } = this.props;
-    const loading = articles.loading;
+    const pathName = this.props.info.match.path;
     return (
       <div className="home-page">
         {this.genBanner()}
@@ -39,24 +39,22 @@ export class ContentHome extends Component {
               <FeedToggle
                 user={user}
                 articles={articles}
-                loading= {loading}
                 articleTag={articles.tag ? articles.tag : ''}
                 onFetchPaging={onFetchPaging}
                 onFetchFeedByUser={onFetchFeedByUser}
-                page={1}
+                pageNow={articles.pageNow}
+                pathName={pathName}
               />
               <ListArticlePreview
                 articles={articles.articles}
                 articlesCount={articles.articlesCount}
                 pageNow={articles.pageNow}
-                loading= {loading}
                 onFetchPaging={onFetchPaging}
                 onGetProfile={onGetProfile}
                 onFetchFeedByUser={onFetchFeedByUser}
                 onFetchArticleByTag={onFetchArticleByTag}
                 articleTag={articles.tag ? articles.tag : ''}
                 onFavoriteAction={onFavoriteAction}
-                page={1}
               />
             </div>
             <div className="col-md-3">
