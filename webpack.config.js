@@ -4,7 +4,6 @@ const htmlWebpackPlugin = new HtmlWebPackPlugin({
   template: "./public/index.html",
   filename: "./index.html"
 });
-
 module.exports = {
   module: {
     rules: [
@@ -42,6 +41,9 @@ module.exports = {
         ]
       }
     ]
+  },
+  devServer: {
+    port: 3000
   },
   plugins: [htmlWebpackPlugin]
 };
