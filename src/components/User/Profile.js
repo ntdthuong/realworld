@@ -30,12 +30,12 @@ export class Profile extends Component {
   }
 
 
-  // handleChangeState = (page) => {
-  //   this.setState({
-  //     page: page,
-  //     currentPage: page
-  //   })
-
+  handleChangeState = (page) => {
+    this.setState({
+      page: page,
+      currentPage: page
+    })
+  }
   handleClick = (username, follow, e) => {
     const { onFollowAction } = this.props;
     e.preventDefault();

@@ -3,11 +3,24 @@ import React from 'react';
 
 import { HomeContainer } from '../containers/HomeContainer';
 import { SignUpContainer } from '../containers/SignUpContainer';
-import { SignInContainer } from '../containers/SignInContainer';
-import { SettingsContainer } from '../containers/SettingsContainer';
+// import { SignInContainer } from '../containers/SignInContainer';
+// import { SettingsContainer } from '../containers/SettingsContainer';
 import { EditorArticleContainer } from '../containers/EditorArticleContainer';
 import { ProfileContainer } from '../containers/ProfileContainer';
 import { ArticleDetailsContainer } from '../containers/ArticleDetailsContainer';
+import Loadable from 'react-loadable';
+
+const LoadingComponent =({isLoading, error}) => {
+  return <div>Loading...</div>;
+}
+const SignInContainer = Loadable({
+  loader: () => import('../containers/SignInContainer'),
+  loading: LoadingComponent
+})
+const SettingsContainer = Loadable({
+  loader: () => import('../containers/SettingsContainer'),
+  loading: LoadingComponent
+})
 
 const routes = [
   {

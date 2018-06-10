@@ -30,6 +30,8 @@ export class ContentHome extends Component {
       onFavoriteAction
     } = this.props;
     const pathName = this.props.info.match.path;
+    const loading = articles.loading;
+    console.log('content ome', loading)
     return (
       <div className="home-page">
         {this.genBanner()}
@@ -44,6 +46,8 @@ export class ContentHome extends Component {
                 onFetchFeedByUser={onFetchFeedByUser}
                 pageNow={articles.pageNow}
                 pathName={pathName}
+                page={1}
+                loading= {loading}
               />
               <ListArticlePreview
                 articles={articles.articles}
@@ -55,6 +59,8 @@ export class ContentHome extends Component {
                 onFetchArticleByTag={onFetchArticleByTag}
                 articleTag={articles.tag ? articles.tag : ''}
                 onFavoriteAction={onFavoriteAction}
+                page={1}
+                loading= {loading}
               />
             </div>
             <div className="col-md-3">

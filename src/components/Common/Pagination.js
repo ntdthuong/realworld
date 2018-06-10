@@ -4,10 +4,13 @@ export class Pagination extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: 1,
+      page: props.page,
       pageNow: props.pageNow || '',
       articleTag: props.articleTag || '',
+      loading: true
     };
+    this.handleChangeState = this.props.handleChangeState.bind(this);
+
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -18,12 +21,19 @@ export class Pagination extends Component {
         articleTag: nextProps.articleTag
       };
     }
-    return null;
+    return {
+      page: prevState.page,
+    };
   }
 
   handleClick = (i, e) => {
     e.preventDefault();
-    this.setState({page: i});
+    console.log('this.props', this.props);
+    this.setState({
+      page: i,
+      loading: true
+    });
+    this.handleChangeState(i);
     const {
       pageNow,
       onFetchPaging,
@@ -34,11 +44,11 @@ export class Pagination extends Component {
       onGetFavoriteAction,
       username
     } = this.props;
-    if(pageNow === 'feed') onFetchFeedByUser((i-1)*10);
-    if(pageNow === 'global') onFetchPaging((i-1)*10);
-    if(pageNow === 'tag') onFetchArticleByTag(articleTag, (i-1)*10);
-    if(pageNow === 'myArticles') onGetMyArticles(username, (i-1)*5);
-    if(pageNow === 'favoritedArticles') onGetFavoriteAction(username, (i-1)*5);
+    if (pageNow === 'feed') onFetchFeedByUser((i - 1) * 10);
+    if (pageNow === 'global') onFetchPaging((i - 1) * 10);
+    if (pageNow === 'tag') onFetchArticleByTag(articleTag, (i - 1) * 10);
+    if (pageNow === 'myArticles') onGetMyArticles(username, (i - 1) * 5);
+    if (pageNow === 'favoritedArticles') onGetFavoriteAction(username, (i - 1) * 5);
   }
 
   genPaging = () => {
@@ -46,7 +56,7 @@ export class Pagination extends Component {
     const { page } = this.state;
     let arrPage = [];
     const limit = pathName === '/:id' ? 5 : 10;
-    for(let i=1; i<= Math.ceil(articlesCount/limit); i++) {
+    for (let i = 1; i <= Math.ceil(articlesCount / limit); i++) {
       const customClass = page === i ? 'page-item active' : 'page-item';
       arrPage.push(
         <li
@@ -58,7 +68,7 @@ export class Pagination extends Component {
         </li>
       );
     }
-    if(articlesCount/limit > 1) return arrPage
+    if (articlesCount / limit > 1) return arrPage
   }
 
   render() {
