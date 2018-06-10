@@ -10,9 +10,12 @@ import React from 'react';
 import Loadable from 'react-loadable';
 
 const LoadingComponent =({isLoading, error}) => {
-  console.log('isLoading', isLoading);
-  console.log('error', error);
-   return <div>Sorry, unable to load...</div>
+  if(isLoading) {
+    return <div>Loading...</div>
+  } else if (error) {
+    return <div>Sorry, unable to load...</div>
+  }
+   return null;
 }
 const HomeContainer = Loadable({
   loader: () => import('../containers/HomeContainer'),
