@@ -1,7 +1,7 @@
 import React from 'react';
 // import Loadable from 'react-loadable';
 
-import { HomeContainer } from '../containers/HomeContainer';
+// import { HomeContainer } from '../containers/HomeContainer';
 import { SignUpContainer } from '../containers/SignUpContainer';
 // import { SignInContainer } from '../containers/SignInContainer';
 // import { SettingsContainer } from '../containers/SettingsContainer';
@@ -23,6 +23,10 @@ const LoadingComponent =({isLoading, error}) => {
 }
 const SignInContainer = Loadable({
   loader: () => import('../containers/SignInContainer'),
+  loading: LoadingComponent
+})
+const HomeContainer = Loadable({
+  loader: () => import('../containers/HomeContainer'),
   loading: LoadingComponent
 })
 const SettingsContainer = Loadable({
