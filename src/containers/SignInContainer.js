@@ -17,14 +17,15 @@ const mapDispatchToProps = (dispatch, props) => {
     },
     onGenErrors: (errors) => {
       let arrError = []
-      if(errors) {
-        for(let key in errors) {
+      if (errors) {
+        for (let key in errors) {
           arrError.push(<li key={key}>{`${key} ${errors[key]}`}</li>)
         }
-        return  <ul className="error-messages">{arrError}</ul>
+        return <ul className="error-messages">{arrError}</ul>
       }
     }
   }
 };
 
-export const SignInContainer = connect(mapStateToProps, mapDispatchToProps)(SignIn);
+const SignInContainer = connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default SignInContainer;

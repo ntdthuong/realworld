@@ -19,11 +19,11 @@ const mapDispatchToProps = (dispatch, props) => {
     },
     onGenErrors: (errors) => {
       let arrError = []
-      if(errors) {
-        for(let key in errors) {
+      if (errors) {
+        for (let key in errors) {
           arrError.push(<li key={key}>{`${key} ${errors[key]}`}</li>)
         }
-        return  <ul className="error-messages">{arrError}</ul>
+        return <ul className="error-messages">{arrError}</ul>
       }
     },
     onGetArticle: (id) => {
@@ -31,5 +31,5 @@ const mapDispatchToProps = (dispatch, props) => {
     }
   }
 };
-
-export const EditorArticleContainer = connect(mapStateToProps, mapDispatchToProps)(EditorArticle);
+const EditorArticleContainer = connect(mapStateToProps, mapDispatchToProps)(EditorArticle);
+export default EditorArticleContainer;

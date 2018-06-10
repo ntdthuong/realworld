@@ -34,4 +34,5 @@ const mapDispatchToProps = (dispatch, props) => {
   }
 };
 
-export default  SettingsContainer = connect(mapStateToProps, mapDispatchToProps)(Settings);
+const SettingsContainer = connect(mapStateToProps, mapDispatchToProps)(Settings);
+export default SettingsContainer;

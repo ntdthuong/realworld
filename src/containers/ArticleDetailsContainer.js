@@ -38,4 +38,5 @@ const mapDispatchToProps = (dispatch, props) => {
   }
 };
 
-export const ArticleDetailsContainer = connect(mapStateToProps, mapDispatchToProps)(ArticleDetails);
+const ArticleDetailsContainer = connect(mapStateToProps, mapDispatchToProps)(ArticleDetails);
+export default ArticleDetailsContainer;

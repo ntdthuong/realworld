@@ -28,4 +28,5 @@ const mapDispatchToProps = (dispatch, props) => {
   }
 };
 
-export const SignUpContainer = connect(mapStateToProps, mapDispatchToProps)(SignUp);
+const SignUpContainer = connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default SignUpContainer;
