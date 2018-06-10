@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { profileAction, editProfileAction, signOutAction } from '../actions';
 import { Settings } from '../components/Settings/Settings';
-
+// let SettingsContainer ;
 const mapStateToProps = (state) => {
   return {
     user: state.user,
@@ -34,4 +34,4 @@ const mapDispatchToProps = (dispatch, props) => {
   }
 };
 
-export const SettingsContainer = connect(mapStateToProps, mapDispatchToProps)(Settings);
+export default  SettingsContainer = connect(mapStateToProps, mapDispatchToProps)(Settings);

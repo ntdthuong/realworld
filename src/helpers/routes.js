@@ -11,7 +11,9 @@ import { ArticleDetailsContainer } from '../containers/ArticleDetailsContainer';
 import Loadable from 'react-loadable';
 
 const LoadingComponent =({isLoading, error}) => {
-  return <div>Loading...</div>;
+  console.log('isLoading', isLoading);
+  console.log('error', error);
+   return <div>Sorry, unable to load...</div>
 }
 const SignInContainer = Loadable({
   loader: () => import('../containers/SignInContainer'),
